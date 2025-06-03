@@ -7,6 +7,8 @@
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
+import '@annotationhub/react-golden-layout/dist/css/goldenlayout-base.css';
+import '@annotationhub/react-golden-layout/dist/css/themes/goldenlayout-dark-theme.css';
 
 startTransition(() => {
   hydrateRoot(

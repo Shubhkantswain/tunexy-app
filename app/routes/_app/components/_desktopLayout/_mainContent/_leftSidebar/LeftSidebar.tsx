@@ -1,72 +1,58 @@
-import { Plus } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react'
-import useIsLargeScreen from '~/hooks/UseMediaQuery'
-import { DefaultListIcon, LibrarayIcon, PlusIcon, SearchIcon } from '~/Svgs';
+import React, { useEffect, useRef, useState } from 'react';
+import useIsLargeScreen from '~/hooks/UseMediaQuery';
 import Header from './Header';
 import TabsSection from './TabsSection';
 import SearchTogglePanel from './SearchTogglePanel';
 import LibraryItems from './LibraryItems';
-import { Panel } from 'react-resizable-panels';
 
 interface LeftSidebarProps {
-    panelSize: number;
+  panelSize: number;
 }
 
 const LeftSidebar: React.FC<LeftSidebarProps> = ({ panelSize }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const isLgScreen = useIsLargeScreen();
 
-    const scrollRef = useRef<HTMLDivElement>(null);
+  type ViewType = "Default List" | "Compact List" | "Default Grid" | "Compact Grid";
+  const [view, setView] = useState<ViewType>("Default List");
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollTop = scrollRef.current?.scrollTop || 0;
+      setIsScrolled(currentScrollTop > 0);
+    };
 
-    const [isScrolled, setIsScrolled] = useState(false);
+    const div = scrollRef.current;
+    if (div) {
+      div.addEventListener("scroll", handleScroll);
+    }
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollTop = scrollRef.current?.scrollTop || 0;
-            setIsScrolled(currentScrollTop > 0);
-        };
+    return () => {
+      div?.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-        const div = scrollRef.current;
-        if (div) {
-            div.addEventListener("scroll", handleScroll);
-        }
+  return (
+    <div
+      id="left-panel"
+      className="bg-[#121212] flex flex-col text-white rounded-md h-full overflow-hidden"
+    >
+      {/* Header */}
+      <Header panelSize={panelSize} />
 
-        // Cleanup
-        return () => {
-            div?.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+      {/* Tabs Section */}
+      <TabsSection panelSize={panelSize} isScrolled={isScrolled} />
 
-    const isLgScreen = useIsLargeScreen()
-    const minSize = isLgScreen ? 7 : 12
+      <div ref={scrollRef} className="overflow-y-auto hide-scrollbar">
+        {/* Search & View Options */}
+        <SearchTogglePanel panelSize={panelSize} view={view} setView={setView} />
 
-    type ViewType = "Default List" | "Compact List" | "Default Grid" | "Compact Grid";
+        {/* Library Items */}
+        <LibraryItems panelSize={panelSize} view={view} />
+      </div>
+    </div>
+  );
+};
 
-
-    const [view, setView] = useState<ViewType>("Default List")
-
-    return (
-        <Panel defaultSize={25} minSize={minSize} maxSize={35}>
-            <div className="h-full bg-[#121212] flex flex-col text-white rounded-md">
-                {/* Header */}
-                <Header panelSize={panelSize} />
-
-
-                {/* Tabs Section */}
-                <TabsSection panelSize={panelSize} isScrolled={isScrolled} />
-
-                <div className='overflow-y-auto hide-scrollbar'
-                    ref={scrollRef}
-                >
-                    {/* Search & View Options */}
-                    <SearchTogglePanel panelSize={panelSize} view={view} setView={setView} />
-
-                    {/* Library Items */}
-                    <LibraryItems panelSize={panelSize} view={view} />
-
-                </div>
-            </div>
-        </Panel>
-    )
-}
-
-export default LeftSidebar
+export default LeftSidebar;

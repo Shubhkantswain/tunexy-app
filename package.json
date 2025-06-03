@@ -13,6 +13,7 @@
     "typegen": "wrangler types"
   },
   "dependencies": {
+    "@annotationhub/react-golden-layout": "^2.3.2",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-scroll-area": "^1.2.9",
     "@radix-ui/react-slider": "^1.3.5",
@@ -25,6 +26,7 @@
     "lucide-react": "^0.511.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-grid-layout": "^1.5.1",
     "react-resizable-panels": "^3.0.2",
     "split.js": "^1.6.5",
     "tailwind-merge": "^3.3.0",
