@@ -1,6 +1,5 @@
 import { Plus } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
-import { ResizablePanel } from '~/components/ui/resizable'
 import useIsLargeScreen from '~/hooks/UseMediaQuery'
 import { DefaultListIcon, LibrarayIcon, PlusIcon, SearchIcon } from '~/Svgs';
 import Header from './Header';

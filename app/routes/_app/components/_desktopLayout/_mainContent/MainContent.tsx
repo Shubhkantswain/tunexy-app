@@ -4,7 +4,6 @@
 import { Outlet } from '@remix-run/react';
 import { Plus } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '~/components/ui/resizable'
 import useIsLargeScreen from '~/hooks/UseMediaQuery';
 import { DefaultListIcon, LibrarayIcon, PlusIcon, SearchIcon } from '~/Svgs';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
