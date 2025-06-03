@@ -14,13 +14,25 @@ function MobileLayout() {
 
     const [isOpen, setIsOpen] = useState(false)
 
+    const handleToggleFullscreen = () => {
+        const elem = document.documentElement;
+
+        if (!document.fullscreenElement) {
+            elem.requestFullscreen().catch((err) => {
+                console.error(`Error enabling full-screen mode: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
     return (
         <div className="bg-[#0E1112] text-white min-h-screen block md:hidden">
             {/* Fixed Header */}
             <header className="fixed top-0 left-0 right-0 z-10 bg-black/80 backdrop-blur-xl h-[62px] border-b border-[#2E3030]">
                 <div className="w-full h-full flex items-center justify-between px-6">
                     {/* Logo on the left */}
-                    <div className="font-bold text-white">
+                    <div className="font-bold text-white" onClick={handleToggleFullscreen}>
                         <svg
                             width="35"
                             height="35"
