@@ -1,23 +1,9 @@
-// app/components/ClientOnly.tsx
-import { useEffect, useState } from "react";
-
-export function ClientOnly({
-  children,
-  fallback = <DefaultFallback />,
-}: {
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
-}) {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true); 
-  }, []);
-
-  if (!isClient) return fallback;
-
+// src/layout/ClientOnly.tsx
+export function ClientOnly({ children }: { children: React.ReactNode }) {
+  if (typeof window === "undefined") return <DefaultFallback/>;
   return <>{children}</>;
 }
+
 
 function DefaultFallback() {
   return (

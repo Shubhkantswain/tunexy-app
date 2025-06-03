@@ -1,3 +1,6 @@
+
+
+
 import { Outlet } from '@remix-run/react';
 import { Plus } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
@@ -15,7 +18,7 @@ function MainContent() {
             <div className="flex w-full h-full px-1">
                     <ResizablePanelGroup
                         direction="horizontal"
-                        onLayout={(sizes) => setPanelSize(sizes[0])} 
+                        onLayout={(sizes) => setPanelSize(sizes[0])}
                         className="flex w-full gap-0.5" // Equal spacing between sidebar and content
                     >
                         {/* Left Sidebar with Library */}

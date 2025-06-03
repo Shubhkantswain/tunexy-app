@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import SpotifyCloneLayout from "~/components/MainLayout";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { json } from "@remix-run/cloudflare";
+import { useLoaderData } from "@remix-run/react";
 
 // Loader (server-side)
 export const loader = async () => {
@@ -57,6 +58,9 @@ const playlists = [
 ];
 
 const HomePagePlaylists = () => {
+    const data = useLoaderData()
+    console.log("data", data);
+    
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const scroll = (direction: "left" | "right") => {
