@@ -10,7 +10,6 @@ function MainContent() {
   return (
     <div className="flex-1 pb-1 overflow-hidden hidden md:flex">
       <div className="flex w-full h-full px-1">
-        <ClientOnly>
           <ResizablePanelGroup
             direction="horizontal"
             onLayout={(sizes) => setPanelSize(sizes[0])}
@@ -26,8 +25,10 @@ function MainContent() {
               </div>
             </ResizablePanel>
           </ResizablePanelGroup>
-        </ClientOnly>
       </div>
     </div>
   );
 }
+
+
+export default MainContent
