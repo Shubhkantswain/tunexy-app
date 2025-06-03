@@ -7,7 +7,7 @@ import Account from './Account'
 
 function Header() {
     return (
-        <header className="items-center justify-between px-6 py-2 bg-black hidden md:flex">
+        <header className="fixed top-0 left-0 right-0 items-center justify-between px-6 py-2 bg-black hidden md:flex">
             {/* Left: Logo */}
             <Logo/>
 

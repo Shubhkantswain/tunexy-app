@@ -55,7 +55,7 @@ function MainContent() {
     }, [isResizing]);
 
     return (
-        <div className="flex-1 pb-1 overflow-hidden hidden md:flex">
+        <div className="flex-1  overflow-hidden hidden md:flex pt-[52px] pb-[73px]">
             <div ref={containerRef} className="flex w-full h-full px-1">
                 {/* Left Sidebar */}
                 <div style={{ width: `${panelSize}%` }} className='mr-0.5'>
