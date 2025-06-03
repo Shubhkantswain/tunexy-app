@@ -1,7 +1,6 @@
 import { Outlet } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
-import useIsLargeScreen from '~/hooks/UseMediaQuery';
 
 function MainContent() {
     const containerRef = useRef<HTMLDivElement>(null);
