@@ -7,6 +7,7 @@ import Header from './Header';
 import TabsSection from './TabsSection';
 import SearchTogglePanel from './SearchTogglePanel';
 import LibraryItems from './LibraryItems';
+import { Panel } from 'react-resizable-panels';
 
 interface LeftSidebarProps {
     panelSize: number;
@@ -45,7 +46,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ panelSize }) => {
     const [view, setView] = useState<ViewType>("Default List")
 
     return (
-        <ResizablePanel defaultSize={25} minSize={minSize} maxSize={35}>
+        <Panel defaultSize={25} minSize={minSize} maxSize={35}>
             <div className="h-full bg-[#121212] flex flex-col text-white rounded-md">
                 {/* Header */}
                 <Header panelSize={panelSize} />
@@ -65,7 +66,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({ panelSize }) => {
 
                 </div>
             </div>
-        </ResizablePanel>
+        </Panel>
     )
 }
 

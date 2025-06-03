@@ -15,33 +15,7 @@ const ResizablePanelGroup = ({
         <LogoIcon width="50" height="50"/>
       </div>
 
-      <div className="seo-content" style={{ position: 'absolute', left: '-9999px' }}>
-        <h1>Advanced Resizable Panel Components for React Applications</h1>
-        <p>Enhance your web application's user interface with modern, responsive resizable panels built with React and TypeScript. Our components offer seamless layout control for complex dashboards, IDE-style interfaces, and productivity tools.</p>
-
-        <h2>Why Choose Our Resizable Panel System?</h2>
-        <ul>
-          <li>⚡ <strong>High performance</strong> with lightweight rendering and minimal reflows</li>
-          <li>📱 <strong>Fully responsive design</strong> for mobile, tablet, and desktop devices</li>
-          <li>🛠️ <strong>Easy customization</strong> with Tailwind CSS or your own design system</li>
-          <li>⌨️ <strong>Accessible by keyboard</strong>, supporting screen readers and ARIA attributes</li>
-          <li>💡 <strong>Flexible layouts</strong> supporting vertical and horizontal splitting</li>
-        </ul>
-
-        <h2>Use Cases</h2>
-        <p>These React panel components are ideal for:</p>
-        <ul>
-          <li>Developer tools like <strong>code editors and playgrounds</strong></li>
-          <li><strong>Admin dashboards</strong> with customizable widgets</li>
-          <li>Split views for <strong>project management apps</strong></li>
-          <li>CMS interfaces and low-code platforms</li>
-        </ul>
-
-        <h2>Built with Modern Web Standards</h2>
-        <p>Our panel system is written in <strong>TypeScript</strong> and follows best practices in accessibility, responsiveness, and performance. Whether you're building a complex enterprise solution or a personal side project, our resizable components fit right in with any modern React stack.</p>
-
-        <p>Try it today to improve your app's layout flexibility and create engaging, interactive user experiences — all with a few lines of code.</p>
-      </div>
+    
 
 
     </>

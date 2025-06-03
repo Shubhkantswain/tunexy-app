@@ -8,6 +8,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '~/componen
 import useIsLargeScreen from '~/hooks/UseMediaQuery';
 import { DefaultListIcon, LibrarayIcon, PlusIcon, SearchIcon } from '~/Svgs';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 
 function MainContent() {
 
@@ -16,24 +17,28 @@ function MainContent() {
     return (
         <div className="flex-1 pb-1 overflow-hidden hidden md:flex">
             <div className="flex w-full h-full px-1">
-                    <ResizablePanelGroup
-                        direction="horizontal"
-                        onLayout={(sizes) => setPanelSize(sizes[0])}
-                        className="flex w-full gap-0.5" // Equal spacing between sidebar and content
-                    >
-                        {/* Left Sidebar with Library */}
-                        <LeftSidebar panelSize={panelSize} />
+                <PanelGroup
+                    direction="horizontal"
+                    onLayout={(sizes) => setPanelSize(sizes[0])}
+                    className="flex w-full gap-0.5" // Equal spacing between sidebar and content
+                >
+                    {/* Left Sidebar with Library */}
+                    <LeftSidebar panelSize={panelSize} />
 
-                        {/* Resize Handle */}
-                        <ResizableHandle withHandle className="bg-transparent hover:bg-white" />
+                    {/* Resize Handle */}
+                    {/* <PanelResizeHandle className='bg-white'/> */}
+                    {/* <PanelResizeHandle className="bg-black hover:bg-white transition-colors duration-200" /> */}
+                    <PanelResizeHandle className="w-[0.5px] !bg-black hover:!bg-white cursor-col-resize" />
 
-                        {/* Main Content */}
-                        <ResizablePanel defaultSize={75}>
-                            <div className="h-full bg-[#121212] rounded-md custom-scrollbar overflow-y-auto">
-                                <div className="p-4 sm:p-6 md:p-8 max-w-[90rem] mx-auto "><Outlet /></div>
-                            </div>
-                        </ResizablePanel>
-                    </ResizablePanelGroup>
+
+
+                    {/* Main Content */}
+                    <Panel defaultSize={75}>
+                        <div className="h-full ml-[0.5px] bg-[#121212] rounded-md custom-scrollbar overflow-y-auto">
+                            <div className="p-4 sm:p-6 md:p-8 max-w-[90rem] mx-auto "><Outlet /></div>
+                        </div>
+                    </Panel>
+                </PanelGroup>
             </div>
         </div>
     )
