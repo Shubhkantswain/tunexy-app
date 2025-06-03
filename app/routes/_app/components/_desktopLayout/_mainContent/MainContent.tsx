@@ -8,6 +8,7 @@ import useIsLargeScreen from '~/hooks/UseMediaQuery';
 import { DefaultListIcon, LibrarayIcon, PlusIcon, SearchIcon } from '~/Svgs';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { ClientOnly } from '~/layout/ClientOnly';
 
 function MainContent() {
 
@@ -16,6 +17,8 @@ function MainContent() {
     return (
         <div className="flex-1 pb-1 overflow-hidden hidden md:flex">
             <div className="flex w-full h-full px-1">
+                <ClientOnly>
+
                 <PanelGroup
                     direction="horizontal"
                     onLayout={(sizes) => setPanelSize(sizes[0])}
@@ -38,6 +41,7 @@ function MainContent() {
                         </div>
                     </Panel>
                 </PanelGroup>
+                    </ClientOnly>
             </div>
         </div>
     )
