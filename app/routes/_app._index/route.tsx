@@ -5,13 +5,6 @@ import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 
-// Loader (server-side)
-export const loader = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await response.json();
-  return json({ posts });
-};
-
 const playlists = [
     {
         id: 1,
@@ -58,8 +51,7 @@ const playlists = [
 ];
 
 const HomePagePlaylists = () => {
-    const data = useLoaderData()
-    console.log("data", data);
+
     
     const scrollRef = useRef<HTMLDivElement>(null);
 

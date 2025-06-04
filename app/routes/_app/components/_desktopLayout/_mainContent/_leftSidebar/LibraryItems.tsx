@@ -69,7 +69,7 @@ const LibraryItems: React.FC<LibraryItemsProps> = ({ panelSize, view }) => {
     console.log(panelSize);
 
     return (
-        <div className="flex-1 px-2">
+        <div className="flex-1 px-2 pb-4">
             <div className="space-y-1">
                 {panelSize < 13 ? (
                     // Small Panel Design

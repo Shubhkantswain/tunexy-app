@@ -3,6 +3,7 @@ import Header from './_header/Header';
 import PlaybackController from './_playbackController/PlaybackController';
 import { MoreHorizontal, Expand, Maximize2 } from 'lucide-react';
 import MainContent from './_mainContent/MainContent';
+import { Slider } from '~/components/ui/slider';
 
 function DesktopLayout() {
     const [hide, setHide] = useState(false)
@@ -24,11 +25,9 @@ function DesktopLayout() {
 
 
     return (
-        <div className={`${expanded ? "bg-[#4B6741]": "bg-black"} flex-col h-screen rounded-lg text-white hidden md:flex`}>
+        <div className={`${expanded ? "bg-[#4B6741]" : "bg-black"} flex-col h-screen text-white hidden md:flex`}>
             {/* Header */}
-            {
-                !hide && <Header />
-            }
+            <Header />
 
             {
                 !expanded ? (
@@ -37,7 +36,7 @@ function DesktopLayout() {
                 ) : (
                     <>
                         {/* Top Bar with Title and Icons */}
-                        <div className={`${hide ? "mt-[0px]" : "mt-[50px]"} flex justify-between items-center px-6 pt-4`}>
+                        <div className={`mt-[50px] flex justify-between items-center px-6 pt-4`}>
                             <span className="text-sm font-semibold text-white/80">New Music Friday India</span>
 
                             <div className="flex items-center gap-4 text-white/70">
@@ -50,7 +49,7 @@ function DesktopLayout() {
                                 <Maximize2 size={18} className="cursor-pointer hover:text-white"
                                     onClick={() => {
                                         setExpanded(false)
-                                        setHide(false)
+                                        // setHide(false)
                                     }}
                                 />
                             </div>
@@ -71,10 +70,8 @@ function DesktopLayout() {
             }
 
             {/* Playback Controller */}
-            <div onClick={() => setExpanded(true)}>
-
+               
                 <PlaybackController />
-            </div>
         </div>
     );
 }

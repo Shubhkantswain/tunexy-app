@@ -1,43 +1,79 @@
-import { Play, RotateCcw, RotateCw, SkipBack, SkipForward, Volume2 } from 'lucide-react'
-import React from 'react'
+import { useState } from 'react'
+import { NextIcon, PlayIcon, PrevIcon, SkipBackwardIcon, SkipForwardIcon, VolumeIcon } from '~/Svgs'
+import { Slider } from '~/components/ui/slider'
 
 function PlaybackController() {
+    const [progress, setProgress] = useState([25]) // Progress in percentage (0-100)
+    const [currentTime, setCurrentTime] = useState("12:34")
+    const [totalTime, setTotalTime] = useState("48:20")
+
+    const handleProgressChange = (value: number[]) => {
+        setProgress(value)
+    }
+
     return (
-        <div className="fixed bottom-0 left-0 right-0 w-full bg-black text-white items-center justify-between px-4 py-3 flex flex-col md:flex-row z-50">
-            {/* Left: Episode Info - shown on all screens */}
-            <div className="flex items-center gap-3 w-full md:w-auto justify-between md:justify-start mb-2 md:mb-0">
-                <img
-                    src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ee/Mahabharata_BR_Chopra.jpg/220px-Mahabharata_BR_Chopra.jpg"
-                    alt="cover"
-                    className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-md"
+        <div className="fixed bottom-0 left-0 right-0 w-full bg-black text-white z-50">
+            {/* Main content */}
+            <div className="py-3 px-4">
+                <div className="flex items-center justify-between w-full">
+                    {/* Left: Episode Info */}
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <img
+                            src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
+                            alt="cover"
+                            className="w-12 h-12 object-cover rounded-sm flex-shrink-0"
+                        />
+                        <div className="text-sm min-w-0 flex-1">
+                            <h3 className="font-semibold truncate text-sm">
+                                Mahabharata Episode 1: Beginnings
+                            </h3>
+                            <p className="text-xs text-gray-400 truncate">The Stories of Mahabharata</p>
+                        </div>
+                    </div>
+
+                    {/* Center: Controls */}
+                    <div className="flex items-center gap-6 mx-8">
+                        <button className="hover:text-gray-300 transition-colors">
+                            <SkipBackwardIcon width="20" height="20" />
+                        </button>
+                        <button className="hover:text-gray-300 transition-colors">
+                            <PrevIcon width="20" height="20" />
+                        </button>
+                        <button className="bg-white text-black p-3 rounded-full hover:bg-gray-200 transition-colors">
+                            <PlayIcon width="20" height="20" />
+                        </button>
+                        <button className="hover:text-gray-300 transition-colors">
+                            <NextIcon width="20" height="20" />
+                        </button>
+                        <button className="hover:text-gray-300 transition-colors">
+                            <SkipForwardIcon width="20" height="20" />
+                        </button>
+                    </div>
+
+                    {/* Right: Volume */}
+                    <div className="flex justify-end flex-1">
+                        <VolumeIcon width="20" height="20" />
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom: Progress Bar */}
+            <div className="w-full px-4 mb-2 group relative">
+                {/* Time indicators */}
+                <div className="absolute -top-5 left-2 right-2 flex justify-between text-xs text-white px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <span>{"1:55"}</span>
+                    <span>{"4:55"}</span>
+                </div>
+
+                {/* Slider */}
+                <Slider
+                    value={progress}
+                    onValueChange={handleProgressChange}
+                    className="w-full cursor-grab"
                 />
-                <div className="text-sm flex-1 md:flex-none ml-2">
-                    <h3 className="font-semibold line-clamp-1 text-xs md:text-sm">
-                        Mahabharata Episode 1: Beginnings
-                    </h3>
-                    <p className="text-xs text-gray-400">The Stories of Mahabharata</p>
-                </div>
-                {/* Show volume on mobile */}
-                <div className="md:hidden">
-                    <Volume2 className="w-5 h-5 cursor-pointer" />
-                </div>
             </div>
 
-            {/* Center: Controls - always shown */}
-            <div className="flex items-center gap-4 md:gap-6 w-full md:w-auto justify-center">
-                <SkipBack className="w-4 h-4 md:w-5 md:h-5 cursor-pointer" />
-                <RotateCcw className="w-4 h-4 md:w-5 md:h-5 cursor-pointer" />
-                <button className="bg-gray-800 p-1 md:p-2 rounded-full">
-                    <Play className="text-white w-4 h-4 md:w-5 md:h-5" />
-                </button>
-                <RotateCw className="w-4 h-4 md:w-5 md:h-5 cursor-pointer" />
-                <SkipForward className="w-4 h-4 md:w-5 md:h-5 cursor-pointer" />
-            </div>
 
-            {/* Right: Volume - hidden on mobile (shown in top row) */}
-            <div className="hidden md:block">
-                <Volume2 className="w-5 h-5 cursor-pointer" />
-            </div>
         </div>
     )
 }
