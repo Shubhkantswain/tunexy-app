@@ -1,8 +1,15 @@
 import { Outlet } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
+import { ExitScreenIcon, FullScreenIcon, MinimizeIcon, MoreIcon } from '~/Svgs';
+import ExpandedNowPlaying from './ExpandedNowPlaying';
 
-function MainContent() {
+interface MainContentProps {
+    isExpanded: boolean;
+    handleToggleExpandScreen: () => void
+}
+
+const MainContent: React.FC<MainContentProps> = ({ isExpanded, handleToggleExpandScreen }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [panelSize, setPanelSize] = useState(22); // Sidebar width in %
     const [isResizing, setIsResizing] = useState(false);
@@ -54,30 +61,54 @@ function MainContent() {
         };
     }, [isResizing]);
 
+    const [isFullScreen, setIsFullScreen] = useState(false)
+
+    const handleToggleFullscreen = () => {
+        const elem = document.documentElement;
+
+        if (!document.fullscreenElement) {
+            elem.requestFullscreen().catch((err) => {
+                console.error(`Error enabling full-screen mode: ${err.message}`);
+            });
+            setIsFullScreen(true)
+        } else {
+            document.exitFullscreen();
+            setIsFullScreen(false)
+        }
+    };
+
     return (
-        <div className="flex-1  overflow-hidden hidden md:flex pt-[53px] pb-[83px]">
+        <div className="flex-1  overflow-hidden hidden md:flex pt-[53px] pb-[75px]">
             <div ref={containerRef} className="flex w-full h-full px-[5px]">
-                {/* Left Sidebar */}
-                <div style={{ width: `${panelSize}%` }} className='mr-0.5'>
-                    <LeftSidebar panelSize={panelSize} />
-                </div>
+                {
+                    !isExpanded ? (
+                        <>
+                            {/* Left Sidebar */}
+                            <div style={{ width: `${panelSize}%` }} className='mr-0.5'>
+                                <LeftSidebar panelSize={panelSize} />
+                            </div>
 
-                {/* Resizer Handle */}
-                <div
-                    onMouseDown={startResizing}
-                    onTouchStart={startResizing}
-                    className="w-[1px] bg-transparent hover:bg-white cursor-col-resize transition-colors touch-none"
-                />
+                            {/* Resizer Handle */}
+                            <div
+                                onMouseDown={startResizing}
+                                onTouchStart={startResizing}
+                                className="w-[1px] bg-transparent hover:bg-white cursor-col-resize transition-colors touch-none"
+                            />
 
-                {/* Main Content */}
-                <div
-                    style={{ width: `${100 - panelSize}%` }}
-                    className="h-full bg-[#121212] rounded-md ml-0.5 custom-scrollbar overflow-y-auto"
-                >
-                    <div className="p-4 sm:p-6 md:p-8 max-w-[90rem] mx-auto">
-                        <Outlet />
-                    </div>
-                </div>
+                            {/* Main Content */}
+                            <div
+                                style={{ width: `${100 - panelSize}%` }}
+                                className="h-full bg-[#121212] rounded-md ml-0.5 custom-scrollbar overflow-y-auto"
+                            >
+                                <div className="p-4 sm:p-6 md:p-8 max-w-[90rem] mx-auto">
+                                    <Outlet />
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <ExpandedNowPlaying handleToggleExpandScreen={handleToggleExpandScreen}/>
+                    )
+                }
             </div>
         </div>
     );

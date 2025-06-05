@@ -11,7 +11,7 @@ import {
     RotateCw,
     User,
 } from "lucide-react";
-import { DownArrowIcon, ExploreIcon, HeartIconFilled, HomeIcon, LibraryIcon, ListIcon, MoreIcon, NextIcon, PauseIcon, PlayIcon, PrevIcon, SearchIcon, SkipBackwardIcon, SkipForwardIcon, VolumeIcon } from '~/Svgs';
+import { DownArrowIcon, ExploreIcon, HomeIcon, LibrarayIcon, MoreIcon, NextIcon, PauseIcon, PlayIcon, PrevIcon, SearchIcon, SkipBackwardIcon, SkipForwardIcon, VolumeIcon } from '~/Svgs';
 import { Link } from '@remix-run/react';
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from './ui/drawer';
 import { Slider } from './ui/slider';
@@ -111,7 +111,7 @@ export default function SpotifyCloneLayout({ children }: { children: React.React
     const navLinks = [
         { to: '/', label: 'Home', icon: <HomeIcon />, showInHeader: true },
         { to: '/explore', label: 'Explore', icon: <ExploreIcon />, showInHeader: true },
-        { to: '/library', label: 'Library', icon: <LibraryIcon />, showInHeader: true },
+        { to: '/library', label: 'Library', icon: <LibrarayIcon />, showInHeader: true },
         { to: '/search', label: 'Search', icon: <SearchIcon />, showInHeader: false },
     ]
 
@@ -302,7 +302,7 @@ export default function SpotifyCloneLayout({ children }: { children: React.React
                                         ) : (
                                             <div className="grid place-items-center mt-5 w-full space-y-2.5 -mb-3">
                                                 <button className=" text-white p-2 rounded-full transition-colors">
-                                                    <LibraryIcon width="27" height="27" />
+                                                    <LibrarayIcon width="27" height="27" />
                                                 </button>
                                                 <button className="hover:bg-[#282828] bg-[#1f1f1f] text-white p-2 rounded-full transition-colors">
                                                     <Plus size={20} />
