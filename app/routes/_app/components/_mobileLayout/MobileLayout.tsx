@@ -41,7 +41,7 @@ function MobileLayout() {
 
 
             {/* Fixed Playback Footer */}
-            <MobileMiniPlayer onExpand={onExpand} />
+            <MobileMiniPlayer onExpand={onExpand} /> {/* we are passing it as a props now it become a action that why we prefer on<action> format */}
 
             <ExpandedNowPlaying isExpanded={isExpanded} onMinimize={onMinimize} />
 
