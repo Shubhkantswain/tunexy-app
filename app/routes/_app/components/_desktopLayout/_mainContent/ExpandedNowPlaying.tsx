@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { ExitScreenIcon, FullScreenIcon, MinimizeIcon, MoreIcon } from '~/Svgs';
 
 interface ExpandedNowPlayingProps {
-    handleToggleExpandScreen: () => void;
+    onMinimize: () => void;
 }
 
-const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ handleToggleExpandScreen }) => {
+const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ onMinimize }) => {
     const [isFullScreen, setIsFullScreen] = useState(false)
 
     const handleToggleFullscreen = () => {
@@ -37,8 +37,7 @@ const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ handleToggleExp
                     </button>
 
                     <button
-                        onClick={handleToggleExpandScreen}
-
+                        onClick={onMinimize}
                     >
                         <MinimizeIcon width="16" height="16" />
                     </button>

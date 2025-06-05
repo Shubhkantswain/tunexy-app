@@ -3,14 +3,23 @@ import { ExpandIcon, MinimizeIcon } from '~/Svgs';
 
 interface LeftSideInfoProps {
     isExpanded: boolean;
-    handleToggleExpandScreen: () => void
+    onExpand: () => void
+    onMinimize: () => void
 }
 
-const LeftSideInfo: React.FC<LeftSideInfoProps> = ({ isExpanded, handleToggleExpandScreen }) => {
+const LeftSideInfo: React.FC<LeftSideInfoProps> = ({ isExpanded, onExpand, onMinimize }) => {
     return (
         <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="relative group cursor-pointer"
-                onClick={handleToggleExpandScreen}
+                onClick={() => {
+                    if (isExpanded) {
+                        onMinimize();
+                        return;
+                    }
+
+                    onExpand();
+                }}
+
             >
                 <img
                     src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"

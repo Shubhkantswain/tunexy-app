@@ -6,10 +6,10 @@ import ExpandedNowPlaying from './ExpandedNowPlaying';
 
 interface MainContentProps {
     isExpanded: boolean;
-    handleToggleExpandScreen: () => void
+    onMinimize: () => void
 }
 
-const MainContent: React.FC<MainContentProps> = ({ isExpanded, handleToggleExpandScreen }) => {
+const MainContent: React.FC<MainContentProps> = ({ isExpanded, onMinimize }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [panelSize, setPanelSize] = useState(22); // Sidebar width in %
     const [isResizing, setIsResizing] = useState(false);
@@ -106,7 +106,7 @@ const MainContent: React.FC<MainContentProps> = ({ isExpanded, handleToggleExpan
                             </div>
                         </>
                     ) : (
-                        <ExpandedNowPlaying handleToggleExpandScreen={handleToggleExpandScreen}/>
+                        <ExpandedNowPlaying onMinimize={onMinimize}/>
                     )
                 }
             </div>
