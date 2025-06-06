@@ -327,6 +327,40 @@ const ExitScreenIcon = ({ width = "24", height = "24" }: IconProps) => (
     </svg>
 )
 
+const LeftArrowIcon = ({ width = "24", height = "24" }: IconProps) => (
+    <svg
+        width={`${width}`} height={`${height}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="currentColor"
+    >
+        <path
+            d="M15 18L9 12L15 6"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+)
+
+const RightArrowIcon = ({ width = "24", height = "24" }: IconProps) => (
+    <svg
+        width={`${width}`} height={`${height}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="currentColor"
+    >
+        <path
+            d="M9 6L15 12L9 18"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+)
+
 //close
 export {
     LogoIcon,
@@ -354,6 +388,7 @@ export {
     ExpandIcon,
     MinimizeIcon,
     FullScreenIcon,
-    ExitScreenIcon
-
+    ExitScreenIcon,
+    LeftArrowIcon,
+    RightArrowIcon
 }

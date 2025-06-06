@@ -39,7 +39,6 @@ function MobileLayout() {
                 <Outlet />
             </main>
 
-
             {/* Fixed Playback Footer */}
             <MobileMiniPlayer onExpand={onExpand} /> {/* we are passing it as a props now it become a action that why we prefer on<action> format */}
 

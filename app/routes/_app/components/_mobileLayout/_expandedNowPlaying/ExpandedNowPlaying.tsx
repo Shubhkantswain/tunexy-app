@@ -5,8 +5,8 @@ import { DownArrowIcon, MoreIcon, NextIcon, PauseIcon, PlayIcon, PlusIcon, PrevI
 import Header from './Header';
 import TrackArtInfo from './TrackArtInfo';
 import ProgressBar from './ProgeressBar';
-import PlaybackControls from './playbackControls';
 import VolumeControl from './VolumeControl';
+import PlaybackControls from './PlaybackControls';
 
 interface ExpandedNowPlayingProps {
     isExpanded: boolean;
