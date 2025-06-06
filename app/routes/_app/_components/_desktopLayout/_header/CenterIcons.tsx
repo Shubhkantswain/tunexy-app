@@ -1,29 +1,48 @@
-import React from 'react'
-import { ExploreIcon, HomeIcon, LibrarayIcon, SearchIcon } from '~/Svgs'
+import { Link, useLocation, useNavigate } from '@remix-run/react';
+import { ExploreFilledIcon, ExploreIcon, HomeFilledIcon, HomeIcon, LibrarayFilledIcon, LibrarayIcon, SearchFilledIcon, SearchIcon } from '~/Svgs'
+import SearchBar from './SearchBar';
+
 
 function CenterIcons() {
+    const navigationItems = [
+        { path: "/", name: "Home", Icon: HomeIcon, ActiveIcon: HomeFilledIcon, visible: true },
+        { path: "/explore", name: "Explore", Icon: ExploreIcon, ActiveIcon: ExploreFilledIcon, visible: true },
+        { path: "/library", name: "Library", Icon: LibrarayIcon, ActiveIcon: LibrarayFilledIcon, visible: true },
+        { path: "/search", name: "Search", Icon: SearchIcon, ActiveIcon: SearchFilledIcon, visible: false },
+
+    ];
+
+    const { pathname } = useLocation()
+
     return (
         <div className="flex items-center gap-6">
-            <button className="p-2 rounded-full bg-[#1f1f1f] hover:bg-[#292929] text-[#DCDCDC] hover:text-[#ffffff] transition">
-                <HomeIcon width="20" height="20" />
-            </button>
-            <button className="p-2 rounded-full bg-[#1f1f1f] hover:bg-[#292929] text-[#DCDCDC] hover:text-[#ffffff] transition">
-                <ExploreIcon width="20" height="20"  />
-            </button>
-            <button className="p-2 rounded-full bg-[#1f1f1f] hover:bg-[#292929] text-[#DCDCDC] hover:text-[#ffffff] transition">
-                <LibrarayIcon width="20" height="20"  />
+            {
+                navigationItems.map(({ path, name, Icon, ActiveIcon, visible }) => {
+                    const isActive = pathname == path;
 
-            </button>
+                    if (!visible) return null
 
-            <div className="flex items-center text-[#919191] bg-white px-6 py-2 rounded-full w-[280px] cursor-pointer">
-                <input
-                    readOnly
-                    type="text"
-                    placeholder="Search"
-                    className="bg-transparent outline-none text-sm placeholder:text-zinc-400 flex-1 cursor-pointer"
-                />
-                <SearchIcon width="20" height="20" />
-            </div>
+                    return (
+                        <Link
+                            key={path}
+                            to={path}
+                            onClick={(e) => {
+                                if (isActive) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                }
+                            }}
+                            className={`${isActive ? "" : "hover:bg-[#292929]"} p-2 rounded-full bg-[#1f1f1f] transition`}
+                        >
+                            {
+                                isActive ? <ActiveIcon width="20" height="20" /> : <Icon width="20" height="20" />
+                            }
+                        </Link>
+                    )
+                })
+            }
+
+          <SearchBar/>
         </div>
     )
 }

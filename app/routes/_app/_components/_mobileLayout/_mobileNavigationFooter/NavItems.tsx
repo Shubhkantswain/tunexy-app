@@ -10,7 +10,7 @@ const NavItems = () => {
         { path: "/search", name: "Search", Icon: SearchIcon, ActiveIcon: SearchFilledIcon, visible: false },
 
     ];
-
+ 
     const { pathname } = useLocation()
 
     return (
