@@ -1,13 +1,13 @@
 import { Link, useLocation } from '@remix-run/react';
 import React from 'react'
-import { ExploreFilledIcon, ExploreIcon, HomeFilledIcon, HomeIcon, LibrarayFilledIcon, LibrarayIcon, SearchIcon } from '~/Svgs';
+import { ExploreFilledIcon, ExploreIcon, HomeFilledIcon, HomeIcon, LibrarayFilledIcon, LibrarayIcon, SearchFilledIcon, SearchIcon } from '~/Svgs';
 
 const NavItems = () => {
     const navigationItems = [
         { path: "/", name: "Home", Icon: HomeIcon, ActiveIcon: HomeFilledIcon, visible: true },
         { path: "/explore", name: "Explore", Icon: ExploreIcon, ActiveIcon: ExploreFilledIcon, visible: true },
         { path: "/library", name: "Library", Icon: LibrarayIcon, ActiveIcon: LibrarayFilledIcon, visible: true },
-        { path: "/search", name: "Search", Icon: SearchIcon, ActiveIcon: SearchIcon, visible: false },
+        { path: "/search", name: "Search", Icon: SearchIcon, ActiveIcon: SearchFilledIcon, visible: false },
 
     ];
 

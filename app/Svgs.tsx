@@ -108,7 +108,6 @@ const ExploreFilledIcon = ({ width = "24", height = "24" }: IconProps) => (
         <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
         <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
         <g id="SVGRepo_iconCarrier">
-            <title>explore-solid</title>
             <g id="Layer_2" data-name="Layer 2">
                 <g id="invisible_box" data-name="invisible box">
                     <rect width="48" height="48" fill="none"></rect>
@@ -184,9 +183,37 @@ const SearchIcon = ({ width = "24", height = "24" }: IconProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={`${width}`} height={`${height}`} viewBox="0 0 24 24"><defs><path id="ic_navigation_search" fill-rule="nonzero" d="M22.707,21.293 L17.025,15.611 C18.258,14.071 19,12.122 19,10 C19,5.038 14.963,1 10,1 C5.038,1 1,5.038 1,10 C1,14.963 5.038,19 10,19 C12.122,19 14.071,18.258 15.611,17.025 L21.293,22.707 C21.488,22.902 21.744,23 22,23 C22.256,23 22.512,22.902 22.707,22.707 C23.098,22.316 23.098,21.684 22.707,21.293 Z M10,17 C6.14,17 3,13.859 3,10 C3,6.14 6.14,3 10,3 C13.859,3 17,6.14 17,10 C17,13.859 13.859,17 10,17 Z"></path></defs><g fill-rule="evenodd" fill="transparent"><rect width="24" height="24"></rect><use href="#ic_navigation_search" fill="currentColor"></use></g></svg>
 )
 
+const SearchFilledIcon = ({ width = "25", height = "25" }: IconProps) => (
+    <svg
+        width={`${width}`}
+        height={`${height}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g id="style=fill">
+            <g id="search-broken">
+                <path
+                    id="vector (Stroke)"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M11.0529 20.1058C16.0527 20.1058 20.1058 16.0527 20.1058 11.0529C20.1058 6.05312 16.0527 2 11.0529 2C6.05312 2 2 6.05312 2 11.0529C2 16.0527 6.05312 20.1058 11.0529 20.1058Z"
+                    fill="currentColor"
+                />
+                <path
+                    id="vector (Stroke)_2"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M17.9697 17.9697C18.2626 17.6768 18.7374 17.6768 19.0303 17.9697L21.5303 20.4697C21.8232 20.7626 21.8232 21.2374 21.5303 21.5303C21.2374 21.8232 20.7626 21.8232 20.4697 21.5303L17.9697 19.0303C17.6768 18.7374 17.6768 18.2626 17.9697 17.9697Z"
+                    fill="currentColor"
+                />
+            </g>
+        </g>
+    </svg>
+)
+
 const AccountIcon = ({ width = "24", height = "24" }: IconProps) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={`${width}`} height={`${height}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5" /><path d="M20 21a8 8 0 0 0-16 0" /></svg>
-
 )
 
 const PlusIcon = ({ width = "24", height = "24" }: IconProps) => (
@@ -456,5 +483,6 @@ export {
     RightArrowIcon,
     HomeFilledIcon,
     ExploreFilledIcon,
-    LibrarayFilledIcon
+    LibrarayFilledIcon,
+    SearchFilledIcon
 }
