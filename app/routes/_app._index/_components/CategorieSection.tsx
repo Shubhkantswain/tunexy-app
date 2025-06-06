@@ -12,7 +12,7 @@ const CategorieSection = () => {
                     onClick={() => setActiveCategory(cat)}
                     className={`rounded-full text-xs font-medium transition-colors duration-200 ${cat === activeCategory
                         ? 'text-[#3babdb]'
-                        : 'text-white '
+                        : 'text-white'
                         }`}
                 >
                     {cat}

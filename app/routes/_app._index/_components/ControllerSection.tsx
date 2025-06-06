@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ShowTrackDialog from '~/routes/_app/components/ShowTracksDialog';
 import { LeftArrowIcon, RightArrowIcon } from '~/Svgs';
 
 interface ControllerSectionsProps {
@@ -8,6 +9,8 @@ interface ControllerSectionsProps {
 }
 
 const ControllerSection: React.FC<ControllerSectionsProps> = ({ scroll, canScrollLeft, canScrollRight }) => {
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
         <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg md:text-xl font-bold">
@@ -34,10 +37,15 @@ const ControllerSection: React.FC<ControllerSectionsProps> = ({ scroll, canScrol
                 </div>
 
                 <button
-                    className="px-4 py-2 rounded-full bg-zinc-800 text-white font-chane font-semibold hover:bg-zinc-700 transition">
+                    className="px-4 py-2 rounded-full bg-zinc-800 text-white font-chane font-semibold hover:bg-zinc-700 transition"
+                    onClick={() => setIsOpen(true)}
+                >
+
                     SEE ALL
                 </button>
             </div>
+
+            <ShowTrackDialog isOpen={isOpen} onClose={() => setIsOpen(false)} />
         </div>
     )
 }
