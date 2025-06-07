@@ -5,14 +5,10 @@ import VoiceRecordingInterface from './_components/Mic';
 
 const route = () => {
   const { pathname } = useLocation();
-  const isSearchPage = pathname === '/search';
-  const navigate = useNavigate();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
-
-  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     const SpeechRecognition =
@@ -81,33 +77,33 @@ const route = () => {
           {
             searchTerm ? (
               <button
-                className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
+                className="p-2 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
                 onClick={() => setSearchTerm('')}
               >
-                <CloseIcon width="13" height="13" />
+                <CloseIcon width="14" height="14" />
               </button>
             ) : (
               <button
-                className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+                className={`p-2 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
                   }`}
-                onClick={() => setIsOpen(true)}
+                onClick={toggleListening}
                 title={listening ? 'Stop microphone' : 'Start microphone'}
               >
-                <MicIcon width="13" height="13" />
+                <MicIcon width="14" height="14" />
               </button>
             )
           }
 
           <button
-            className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
+            className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-2 rounded-full bg-[#2a2a2a] transition-colors`}
             disabled={!searchTerm}
           >
-            <SearchIcon width="13" height="13" />
+            <SearchIcon width="14" height="14" />
           </button>
         </div>
       </div>
 
-      <VoiceRecordingInterface isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <VoiceRecordingInterface isOpen={listening} onClose={() => setListening(false)} />
     </>
   )
 }

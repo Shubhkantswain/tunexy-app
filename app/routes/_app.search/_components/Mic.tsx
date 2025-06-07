@@ -62,7 +62,7 @@ const VoiceRecordingInterface: React.FC<VoiceRecordingInterfaceProps> = ({ isOpe
                         <div className="mt-8 flex items-center space-x-2">
                             <div className={`w-2 h-2 rounded-full ${isListening ? 'bg-red-500 animate-pulse' : 'bg-gray-500'}`} />
                             <span className="text-sm text-gray-400">
-                                {isListening ? "Listening... Please speak your voice prompt" : "Tap the mic to start speaking"}
+                                {isListening ? "Please speak your voice prompt" : "Tap the mic to start speaking"}
 
                             </span>
                         </div>
