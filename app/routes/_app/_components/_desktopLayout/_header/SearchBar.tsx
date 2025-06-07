@@ -11,7 +11,6 @@ const SearchBar = () => {
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  // Initialize SpeechRecognition once
   useEffect(() => {
     const SpeechRecognition =
       (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -49,8 +48,12 @@ const SearchBar = () => {
     recognitionRef.current = recognition;
   }, []);
 
-  const startListening = () => {
-    if (recognitionRef.current && !listening) {
+  const toggleListening = () => {
+    if (!recognitionRef.current) return;
+
+    if (listening) {
+      recognitionRef.current.stop();
+    } else {
       setSearchTerm('');
       setListening(true);
       recognitionRef.current.start();
@@ -83,27 +86,38 @@ const SearchBar = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="bg-transparent outline-none text-sm placeholder:text-zinc-400 flex-1"
           />
-          <div className="flex items-center gap-2 ml-2">
+
+          {/* Separator */}
+          <div className="w-px h-6 bg-[#7B7B7B] opacity-50 mx-2"></div>
+
+          <div className="flex items-center gap-2">
+            {
+              searchTerm && (
+                <button
+                  className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
+                  onClick={() => setSearchTerm('')}
+                >
+                  <CloseIcon width="13" height="13" />
+                </button>
+              )
+            }
             <button
-              className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
-              onClick={() => setSearchTerm('')}
-            >
-              <CloseIcon width="13" height="13" />
-            </button>
-            <button
-              className={`p-1.5 rounded-full transition-colors ${
-                listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
-              }`}
-              onClick={startListening}
-              title="Use microphone"
+              className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+                }`}
+              onClick={toggleListening}
+              title={listening ? 'Stop microphone' : 'Start microphone'}
             >
               <MicIcon width="13" height="13" />
             </button>
-            <button className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors">
+            <button
+              className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
+              disabled={!searchTerm}
+            >
               <SearchIcon width="13" height="13" />
             </button>
           </div>
         </div>
+
       )}
     </>
   );
