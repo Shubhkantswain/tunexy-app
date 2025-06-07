@@ -78,7 +78,7 @@ const SearchBar = () => {
           <SearchIcon width="20" height="20" />
         </div>
       ) : (
-        <div className="flex items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-[350px]">
+        <div className="flex items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-[370px]">
           <input
             type="text"
             placeholder="Search"
@@ -120,7 +120,7 @@ const SearchBar = () => {
 
       )}
     </>
-  );
+  ); 
 };
 
 export default SearchBar;
