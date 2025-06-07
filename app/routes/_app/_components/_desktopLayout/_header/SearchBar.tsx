@@ -78,7 +78,7 @@ const SearchBar = () => {
           <SearchIcon width="20" height="20" />
         </div>
       ) : (
-        <div className="flex items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-[370px]">
+        <div className="flex items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-[350px]">
           <input
             type="text"
             placeholder="Search"
@@ -92,23 +92,25 @@ const SearchBar = () => {
 
           <div className="flex items-center gap-2">
             {
-              searchTerm && (
+              searchTerm ? (
                 <button
                   className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
                   onClick={() => setSearchTerm('')}
                 >
                   <CloseIcon width="13" height="13" />
                 </button>
+              ) : (
+                <button
+                  className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+                    }`}
+                  onClick={toggleListening}
+                  title={listening ? 'Stop microphone' : 'Start microphone'}
+                >
+                  <MicIcon width="13" height="13" />
+                </button>
               )
             }
-            <button
-              className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
-                }`}
-              onClick={toggleListening}
-              title={listening ? 'Stop microphone' : 'Start microphone'}
-            >
-              <MicIcon width="13" height="13" />
-            </button>
+
             <button
               className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
               disabled={!searchTerm}
@@ -120,7 +122,7 @@ const SearchBar = () => {
 
       )}
     </>
-  ); 
+  );
 };
 
 export default SearchBar;

@@ -1,58 +1,109 @@
-import React, { useState } from 'react';
-import { Search, X } from 'lucide-react';
+import { useLocation, useNavigate } from '@remix-run/react';
+import React, { useEffect, useRef, useState } from 'react'
+import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
 
-export default function SearchBar() {
-  const [searchValue, setSearchValue] = useState('');
+const route = () => {
+  const { pathname } = useLocation();
+  const isSearchPage = pathname === '/search';
+  const navigate = useNavigate();
 
-  const handleClear = () => {
-    setSearchValue('');
-  };
+  const [searchTerm, setSearchTerm] = useState('');
+  const [listening, setListening] = useState(false);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
-  const handleSubmit = () => {
-    console.log('Search submitted:', searchValue);
+  useEffect(() => {
+    const SpeechRecognition =
+      (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      console.error('Speech Recognition not supported');
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      console.log('🎤 Listening...');
+    };
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const spokenText = event.results[0][0].transcript;
+      console.log('Transcript:', spokenText);
+      setSearchTerm(spokenText);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error);
+      setListening(false);
+    };
+
+    recognition.onend = () => {
+      setListening(false);
+      console.log('🛑 Stopped Listening');
+    };
+
+    recognitionRef.current = recognition;
+  }, []);
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) return;
+
+    if (listening) {
+      recognitionRef.current.stop();
+    } else {
+      setSearchTerm('');
+      setListening(true);
+      recognitionRef.current.start();
+    }
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
-      <div className="relative">
-        <div className="relative flex items-center bg-gray-800 rounded-lg border border-gray-700 focus-within:border-cyan-400 transition-colors shadow-lg">
-          {/* Search Input */}
-          <input
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search..."
-            className="flex-1 bg-transparent text-white placeholder-gray-400 px-3 py-2 sm:px-4 sm:py-3 lg:px-6 lg:py-4 rounded-l-lg focus:outline-none text-sm sm:text-base lg:text-lg min-w-0"
-          />
-          
-          {/* Clear Button */}
-          {searchValue && (
-            <button
-              type="button"
-              onClick={handleClear}
-              className="p-2 sm:p-2.5 lg:p-3 text-gray-400 hover:text-white transition-colors flex-shrink-0"
-              aria-label="Clear search"
-            >
-              <X size={16} className="sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
-            </button>
-          )}
-          
-          {/* Search Button */}
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="bg-cyan-500 hover:bg-cyan-600 active:bg-cyan-700 p-2 sm:p-3 lg:p-4 rounded-r-lg transition-colors group flex-shrink-0"
-            aria-label="Search"
-          >
-            <Search size={16} className="text-white sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
-          </button>
-        </div>
-      </div>
-      
-      {/* Demo text */}
-      <p className="text-gray-400 text-xs sm:text-sm mt-3 sm:mt-4 text-center">
-        Type something and press Enter or click the search button
-      </p>
-    </div>
-  );
+      <div className="flex md:hidden items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-full">
+             <input
+               type="text"
+               placeholder="Search"
+               value={searchTerm}
+               onChange={(e) => setSearchTerm(e.target.value)}
+               className="bg-transparent outline-none text-sm placeholder:text-zinc-400 flex-1"
+             />
+   
+             {/* Separator */}
+             <div className="w-px h-6 bg-[#7B7B7B] opacity-50 mx-2"></div>
+   
+             <div className="flex items-center gap-2">
+               {
+                 searchTerm ? (
+                   <button
+                     className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
+                     onClick={() => setSearchTerm('')}
+                   >
+                     <CloseIcon width="13" height="13" />
+                   </button>
+                 ) : (
+                   <button
+                     className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+                       }`}
+                     onClick={toggleListening}
+                     title={listening ? 'Stop microphone' : 'Start microphone'}
+                   >
+                     <MicIcon width="13" height="13" />
+                   </button>
+                 )
+               }
+   
+               <button
+                 className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
+                 disabled={!searchTerm}
+               >
+                 <SearchIcon width="13" height="13" />
+               </button>
+             </div>
+           </div>
+
+  )
 }
+
+export default route 
