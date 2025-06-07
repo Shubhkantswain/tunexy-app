@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react';
+import ListeningInterface from '~/routes/_app/components/ListeningInterface';
 import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
 
 const SearchBar = () => {
@@ -121,6 +122,8 @@ const SearchBar = () => {
         </div>
 
       )}
+
+      <ListeningInterface listening={listening} onStopListening={() => setListening(false)} />
     </>
   );
 };

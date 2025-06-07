@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { Mic, MicOff } from 'lucide-react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '~/components/ui/dialog';
 
-
-interface VoiceRecordingInterfaceProps {
+interface ListeningInterfaceProps {
     listening: boolean;
     onStopListening: () => void
 }
 
-const VoiceRecordingInterface: React.FC<VoiceRecordingInterfaceProps> = ({ listening, onStopListening }) => {
+const ListeningInterface: React.FC<ListeningInterfaceProps> = ({ listening, onStopListening }) => {
     return (
         <Dialog open={listening} onOpenChange={onStopListening}>
             <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto bg-[#111111] border-zinc-700 text-white [&::-webkit-scrollbar]:hidden"> {/* Black gradient background */}
@@ -68,4 +67,4 @@ const VoiceRecordingInterface: React.FC<VoiceRecordingInterfaceProps> = ({ liste
     );
 };
 
-export default VoiceRecordingInterface;
+export default ListeningInterface;

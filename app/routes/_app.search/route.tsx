@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react'
 import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
-import VoiceRecordingInterface from './_components/Mic';
+import ListeningInterface from '../_app/components/ListeningInterface';
 
 const route = () => {
   const { pathname } = useLocation();
@@ -103,9 +103,10 @@ const route = () => {
         </div>
       </div>
 
-      <VoiceRecordingInterface listening={listening} onStopListening={() => setListening(false)} />
+      <ListeningInterface listening={listening} onStopListening={() => setListening(false)} />
     </>
   )
 }
 
-export default route 
+
+export default route
