@@ -9,25 +9,10 @@ import ExpandedNowPlaying from './_expandedNowPlaying/ExpandedNowPlaying'
 import MobileNavigationFooter from './_mobileNavigationFooter/MobileNavigationFooter'
 
 function MobileLayout() {
+    const [isScreenExpanded, setIsScreenExpanded] = useState(false)
 
-
-    const [isExpanded, setIsExpanded] = useState(false)
-
-    const handleToggleFullscreen = () => {
-        const elem = document.documentElement;
-
-        if (!document.fullscreenElement) {
-            elem.requestFullscreen().catch((err) => {
-                console.error(`Error enabling full-screen mode: ${err.message}`);
-            });
-        } else {
-            document.exitFullscreen();
-        }
-    };
-
-    const onExpand = () => setIsExpanded(true);
-    const onMinimize = () => setIsExpanded(false);
-
+    const screenExpand = () => setIsScreenExpanded(true);
+    const screenMinimize = () => setIsScreenExpanded(false);
 
     return (
         <div className="bg-[#0E1112] text-white min-h-screen block md:hidden">
@@ -40,9 +25,9 @@ function MobileLayout() {
             </main>
 
             {/* Fixed Playback Footer */}
-            <MobileMiniPlayer onExpand={onExpand} /> {/* we are passing it as a props now it become a action that why we prefer on<action> format */}
+            <MobileMiniPlayer onScreenExpand={screenExpand} /> {/* we are passing it as a props now it become a action that why we prefer on<action> format */}
 
-            <ExpandedNowPlaying isExpanded={isExpanded} onMinimize={onMinimize} />
+            <ExpandedNowPlaying isScreenExpanded={isScreenExpanded} onScreenMinimize={screenMinimize} />
 
             {/* Fixed Mobile Navigation Footer */}
             <MobileNavigationFooter />

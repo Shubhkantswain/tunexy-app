@@ -2,15 +2,15 @@ import React from 'react'
 import { DownArrowIcon, QueueIcon } from '~/Svgs'
 
 interface HeaderProps {
-    onMinimize: () => void
+    onScreenMinimize: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ onMinimize }) => {
+const Header: React.FC<HeaderProps> = ({ onScreenMinimize }) => {
     return (
         <div className="p-4 flex items-center justify-between relative">
             <button
                 className="relative group hover:text-[#93D0D5] text-white transition-colors duration-300"
-                onClick={onMinimize}
+                onClick={onScreenMinimize}
             >
                 <DownArrowIcon />
             </button>

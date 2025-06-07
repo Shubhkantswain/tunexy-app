@@ -3,16 +3,16 @@ import LeftSideInfo from './LeftSideInfo';
 import PlaybackControls from './PlaybackControls';
 
 interface MobileMiniPlayerProps {
-    onExpand: () => void;
+    onScreenExpand: () => void;
 }
 
-const MobileMiniPlayer: React.FC<MobileMiniPlayerProps> = ({ onExpand }) => {
+const MobileMiniPlayer: React.FC<MobileMiniPlayerProps> = ({ onScreenExpand }) => {
     return (
         <>
             {
                 true && (
                     <footer
-                        onClick={onExpand}
+                        onClick={onScreenExpand}
                         className="fixed bottom-16 mb-2.5 rounded-md left-0 right-0 z-20 h-[60px] w-[95%] mx-auto overflow-hidden">
                         {/* Background with blur */}
                         <div className="absolute inset-0 z-0">

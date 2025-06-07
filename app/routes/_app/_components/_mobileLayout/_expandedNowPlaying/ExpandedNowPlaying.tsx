@@ -9,13 +9,13 @@ import VolumeControl from './VolumeControl';
 import PlaybackControls from './PlaybackControls';
 
 interface ExpandedNowPlayingProps {
-    isExpanded: boolean;
-    onMinimize: () => void
+    isScreenExpanded: boolean;
+    onScreenMinimize: () => void
 }
 
-const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ isExpanded, onMinimize }) => {
+const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ isScreenExpanded, onScreenMinimize }) => {
     return (
-        <Drawer open={isExpanded} onClose={onMinimize}>
+        <Drawer open={isScreenExpanded} onClose={onScreenMinimize}>
             <DrawerContent className="bg-black h-full w-full">
                 <div
                     className={`hide-scrollbar fixed inset-0 bg-black overflow-y-auto z-50`}
@@ -33,7 +33,7 @@ const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ isExpanded, onM
 
                     <div className="relative z-10 max-w-3xl mx-auto min-h-full">
                         {/* Header */}
-                        <Header onMinimize={onMinimize} />
+                        <Header onScreenMinimize={onScreenMinimize} />
 
                         <TrackArtInfo />
 

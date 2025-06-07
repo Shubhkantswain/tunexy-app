@@ -47,17 +47,18 @@ const route = () => {
     recognitionRef.current = recognition;
   }, []);
 
-  const toggleListening = () => {
+  const startListening = () => {
     if (!recognitionRef.current) return;
-
-    if (listening) {
-      recognitionRef.current.stop();
-    } else {
-      setSearchTerm('');
-      setListening(true);
-      recognitionRef.current.start();
-    }
+    setSearchTerm('');
+    setListening(true);
+    recognitionRef.current.start();
   };
+
+  const stopListening = () => {
+    if (!recognitionRef.current) return;
+    recognitionRef.current.stop();
+  };
+
 
   return (
     <>
@@ -86,7 +87,7 @@ const route = () => {
               <button
                 className={`p-2 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
                   }`}
-                onClick={toggleListening}
+                onClick={startListening}
                 title={listening ? 'Stop microphone' : 'Start microphone'}
               >
                 <MicIcon width="14" height="14" />
@@ -103,7 +104,7 @@ const route = () => {
         </div>
       </div>
 
-      <ListeningInterface listening={listening} onStopListening={() => setListening(false)} />
+      <ListeningInterface listening={listening} onStopListening={stopListening} />
     </>
   )
 }

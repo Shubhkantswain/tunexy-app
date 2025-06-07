@@ -49,16 +49,16 @@ const SearchBar = () => {
     recognitionRef.current = recognition;
   }, []);
 
-  const toggleListening = () => {
+  const startListening = () => {
     if (!recognitionRef.current) return;
+    setSearchTerm('');
+    setListening(true);
+    recognitionRef.current.start();
+  };
 
-    if (listening) {
-      recognitionRef.current.stop();
-    } else {
-      setSearchTerm('');
-      setListening(true);
-      recognitionRef.current.start();
-    }
+  const stopListening = () => {
+    if (!recognitionRef.current) return;
+    recognitionRef.current.stop();
   };
 
   return (
@@ -104,7 +104,7 @@ const SearchBar = () => {
                 <button
                   className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
                     }`}
-                  onClick={toggleListening}
+                  onClick={startListening}
                   title={listening ? 'Stop microphone' : 'Start microphone'}
                 >
                   <MicIcon width="13" height="13" />
@@ -123,7 +123,7 @@ const SearchBar = () => {
 
       )}
 
-      <ListeningInterface listening={listening} onStopListening={() => setListening(false)} />
+      <ListeningInterface listening={listening} onStopListening={stopListening} />
     </>
   );
 };
