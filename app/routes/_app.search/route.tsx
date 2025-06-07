@@ -103,7 +103,7 @@ const route = () => {
         </div>
       </div>
 
-      <VoiceRecordingInterface isOpen={listening} onClose={() => setListening(false)} />
+      <VoiceRecordingInterface listening={listening} onStopListening={() => setListening(false)} />
     </>
   )
 }
