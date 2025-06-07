@@ -71,7 +71,7 @@ const route = () => {
         />
 
         {/* Separator */}
-        <div className="w-px h-6 bg-[#7B7B7B] opacity-50 mx-2"></div>
+        <div className="w-px h-7 bg-[#7B7B7B] opacity-50 mx-2"></div>
 
         <div className="flex items-center gap-2">
           {
