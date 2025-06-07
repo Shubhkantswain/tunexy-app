@@ -8,7 +8,7 @@ const Header = () => {
             <div className="w-full h-full flex items-center justify-between px-6">
                 {/* Logo on the left */}
                 <Logo/>
-
+                
                 {/* Account Icon on the right */}
                 <Account/>
             </div>

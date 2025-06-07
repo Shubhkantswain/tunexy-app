@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react'
 import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
+import VoiceRecordingInterface from './_components/Mic';
 
 const route = () => {
   const { pathname } = useLocation();
@@ -10,6 +11,8 @@ const route = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
+
+  const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
     const SpeechRecognition =
@@ -61,48 +64,51 @@ const route = () => {
   };
 
   return (
-      <div className="flex md:hidden items-center text-white bg-[#1f1f1f] px-4 py-[7.5px] rounded-md w-full">
-             <input
-               type="text"
-               placeholder="Search"
-               value={searchTerm}
-               onChange={(e) => setSearchTerm(e.target.value)}
-               className="bg-transparent outline-none text-sm placeholder:text-zinc-400 flex-1"
-             />
-   
-             {/* Separator */}
-             <div className="w-px h-6 bg-[#7B7B7B] opacity-50 mx-2"></div>
-   
-             <div className="flex items-center gap-2">
-               {
-                 searchTerm ? (
-                   <button
-                     className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
-                     onClick={() => setSearchTerm('')}
-                   >
-                     <CloseIcon width="13" height="13" />
-                   </button>
-                 ) : (
-                   <button
-                     className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
-                       }`}
-                     onClick={toggleListening}
-                     title={listening ? 'Stop microphone' : 'Start microphone'}
-                   >
-                     <MicIcon width="13" height="13" />
-                   </button>
-                 )
-               }
-   
-               <button
-                 className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
-                 disabled={!searchTerm}
-               >
-                 <SearchIcon width="13" height="13" />
-               </button>
-             </div>
-           </div>
+    <>
+      <div className="flex md:hidden items-center text-white bg-[#1f1f1f] px-4 py-[8px] rounded-md w-full">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="bg-transparent outline-none text-sm placeholder:text-zinc-400 flex-1"
+        />
 
+        {/* Separator */}
+        <div className="w-px h-6 bg-[#7B7B7B] opacity-50 mx-2"></div>
+
+        <div className="flex items-center gap-2">
+          {
+            searchTerm ? (
+              <button
+                className="p-1.5 rounded-full bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors"
+                onClick={() => setSearchTerm('')}
+              >
+                <CloseIcon width="13" height="13" />
+              </button>
+            ) : (
+              <button
+                className={`p-1.5 rounded-full transition-colors ${listening ? 'bg-red-600' : 'bg-[#2a2a2a] hover:bg-[#3a3a3a]'
+                  }`}
+                onClick={() => setIsOpen(true)}
+                title={listening ? 'Stop microphone' : 'Start microphone'}
+              >
+                <MicIcon width="13" height="13" />
+              </button>
+            )
+          }
+
+          <button
+            className={`${searchTerm ? "opacity-100 hover:bg-[#3a3a3a]" : "opacity-50"} p-1.5 rounded-full bg-[#2a2a2a] transition-colors`}
+            disabled={!searchTerm}
+          >
+            <SearchIcon width="13" height="13" />
+          </button>
+        </div>
+      </div>
+
+      <VoiceRecordingInterface isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </>
   )
 }
 
