@@ -74,7 +74,7 @@ const LibraryPage = () => {
         {['Playlists', 'Podcasts', 'Songs', 'Albums'].map((tab) => (
           <button
             key={tab}
-            className="bg-gray-800 hover:bg-gray-700 text-xs text-white py-1.5 px-4 rounded-full"
+            className="bg-[#2d2f2f] hover:bg-[#535555] text-xs text-white py-1.5 px-4 rounded-full"
           >
             {tab}
           </button>
@@ -82,7 +82,7 @@ const LibraryPage = () => {
       </div>
 
       {/* Header */}
-      <div className="flex items-center justify-between -mb-3 md:-mb-6">
+      <div className="flex items-center justify-between -mb-2">
         <h2 className="text-white text-xl font-semibold">Playlists</h2>
         <button className="flex items-center gap-2 text-xs px-3 py-1.5 bg-[#2d2f2f] hover:bg-[#535555] text-white rounded-full font-medium transition">
           <Plus size={16} />

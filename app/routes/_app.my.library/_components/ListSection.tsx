@@ -1,26 +1,21 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Music, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LeftArrowIcon, RightArrowIcon } from '~/Svgs';
 
-const playlists = [
-    { id: 1, title: 'My Likes', img: '/likes.png' },
-    { id: 2, title: 'new pslls' },
-    { id: 3, title: 'lllllllllllllllllll', img: '/azaad.png' },
-    { id: 4, title: 'kkkkkkkkkkk' },
-    { id: 5, title: 'hhhhhhh' },
-    { id: 6, title: 'new2' },
-    { id: 7, title: 'new2' },
-    { id: 8, title: 'new2' },
-    { id: 9, title: 'new2' },
-    { id: 10, title: 'new2' },
-    { id: 11, title: 'new2' },
-    { id: 12, title: 'new2' },
-
-
-
-
+const tracks = [
+    { id: 1, title: "My Likes", subtitle: "new psils" },
+    { id: 2, title: "Playlist Mix", subtitle: "kkkkkkkkkk" },
+    { id: 3, title: "Favorites", subtitle: "hhhhhhh" },
+    { id: 4, title: "Chill Vibes", subtitle: "relaxing beats" },
+    { id: 5, title: "Workout Mix", subtitle: "high energy" },
+    { id: 6, title: "Study Session", subtitle: "focus music" },
+    { id: 7, title: "Night Drive", subtitle: "smooth tunes" },
+    { id: 8, title: "Coffee Shop", subtitle: "acoustic vibes" },
+    { id: 9, title: "Dance Party", subtitle: "upbeat hits" },
+    { id: 10, title: "Throwback", subtitle: "classic songs" }
 ];
 
-const PlaylistScroller = () => {
+const Tracklist = () => {
     const scrollRef = useRef(null);
     const [canScroll, setCanScroll] = useState({ left: false, right: false });
 
@@ -63,69 +58,69 @@ const PlaylistScroller = () => {
     }, []);
 
     return (
-        <div className="relative w-full mt-7 md:mt-10">
+        <div className="rounded-lg mt-7">
+            <div className="flex items-center">
+                {/* Left Arrow */}
+                {
+                    canScroll.left && (
+                        <button
+                            onClick={() => scroll("left")}
+                            className="p-2 z-50 -mr-[30px] -mt-[22px] rounded-full bg-black/70 backdrop:blur-xl text-white hover:bg-black/80 hover:scale-110 transition-all duration-200 flex-shrink-0"
+                        >
+                            {/* <ChevronLeft size={24} /> */}
+                            <LeftArrowIcon width="15" height="16" />
 
+                        </button>
+                    )
+                }
 
-            {/* Scrollable Playlist Area */}
-            <div className="relative -ml-4 md:ml-0">
-                {canScroll.left && (
-                    <button
-                        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 text-white p-2 rounded-full"
-                        onClick={() => scroll('left')}
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                )}
-                {canScroll.right && (
-                    <button
-                        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-black/70 text-white p-2 rounded-full"
-                        onClick={() => scroll('right')}
-                    >
-                        <ChevronRight size={24} />
-                    </button>
-                )}
-
+                {/* Scrollable Track Container */}
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
-                    className="flex gap-4 md:gap-6 px-4 md:px-0  overflow-x-auto hide-scrollbar scroll-smooth"
+                    className="overflow-x-auto hide-scrollbar flex-1"
                 >
-                    {playlists.map((playlist) => (
-                        <div
-                            key={playlist.id}
-                            className="w-[140px] sm:w-[150px] md:w-[150px] lg:w-[160px] flex-shrink-0 bg-[#1f1f1f] text-white rounded-lg flex flex-col items-center justify-center text-sm overflow-hidden"
-                        >
-                            {playlist.img ? (
-                                <img
-                                    src={playlist.img}
-                                    alt={playlist.title}
-                                    className="w-full h-[140px] sm:h-[150px] md:h-[150px] lg:h-[160px] object-cover rounded-lg"
-                                />
-                            ) : (
-                                <div className="flex flex-col items-center text-gray-300">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        className="w-8 h-8"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M9 19V6l12-2v13M9 6l12-2M9 6v13"
-                                        />
-                                    </svg>
-                                    <span className="mt-2 text-center px-2">{playlist.title}</span>
+                    <div className="flex gap-4 md:gap-6 pb-2" style={{ minWidth: 'max-content' }}>
+                        {tracks.map((playlist) => (
+                            <div
+                                key={playlist.id}
+                                className="shrink-0 w-[140px] sm:w-[150px] md:w-[150px] lg:w-[160px]"
+                            >
+                                <div className="rounded overflow-hidden">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
+                                        alt={playlist.title}
+                                        className="w-full h-[140px] sm:h-[150px] md:h-[150px] lg:h-[160px] object-cover rounded"
+                                    />
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                                <div className="mt-2">
+                                    <h3 className="text-sm  font-semibold truncate">
+                                        {playlist.title}
+                                    </h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
+
+                {/* Right Arrow */}
+                {
+                    canScroll.right && (
+                        <button
+                            onClick={() => scroll("right")}
+                            className="p-2 rounded-full -ml-[30px] -mt-[22px] bg-black/70 backdrop:blur-xl text-white hover:bg-black/80 hover:scale-110 transition-all duration-200 flex-shrink-0"
+                        >
+                            {/* <ChevronRight size={24} /> */}
+                            <RightArrowIcon width="15" height="15" />
+                        </button>
+                    )
+                }
             </div>
+
+            {/* Custom Scrollbar Styles */}
+
         </div>
     );
 };
 
-export default PlaylistScroller;
+export default Tracklist;

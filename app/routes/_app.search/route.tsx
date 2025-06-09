@@ -104,7 +104,7 @@ const route = () => {
         </div>
       </div>
 
-      <div className="mt-8 text-white">
+      <div className="mt-8 md:mt-0 text-white">
         <h2 className="text-lg font-semibold mb-4">Moods & Activities</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
           {[
