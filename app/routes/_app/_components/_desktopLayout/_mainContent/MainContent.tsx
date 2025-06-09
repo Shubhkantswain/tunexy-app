@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import LeftSidebar from './_leftSidebar/LeftSidebar';
 import { ExitScreenIcon, FullScreenIcon, MinimizeIcon, MoreIcon } from '~/Svgs';
 import ExpandedNowPlaying from './ExpandedNowPlaying';
+import { usePanelSizeStore } from '~/store/usePanelSizeStore';
 
 interface MainContentProps {
     isExpanded: boolean;
@@ -11,7 +12,7 @@ interface MainContentProps {
 
 const MainContent: React.FC<MainContentProps> = ({ isExpanded, onMinimize }) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [panelSize, setPanelSize] = useState(22); // Sidebar width in %
+    const {panelSize, setPanelSize} = usePanelSizeStore(); // Sidebar width in %
     const [isResizing, setIsResizing] = useState(false);
 
     const startResizing = () => {
@@ -106,7 +107,7 @@ const MainContent: React.FC<MainContentProps> = ({ isExpanded, onMinimize }) => 
                             </div>
                         </>
                     ) : (
-                        <ExpandedNowPlaying onMinimize={onMinimize}/>
+                        <ExpandedNowPlaying onMinimize={onMinimize}/> 
                     )
                 }
             </div>

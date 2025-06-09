@@ -1,10 +1,16 @@
 import { HeartIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
+import { usePanelSizeStore } from '~/store/usePanelSizeStore';
 import { MoreIcon, PauseIcon, PlayIcon } from '~/Svgs';
 
 const route = () => {
     const dropdownRef = useRef<HTMLDivElement>(null)
     const [showDropdown, setShowDropdown] = useState(false)
+
+    const { panelSize, setPanelSize } = usePanelSizeStore()
+
+    console.log("panelSize", panelSize);
+
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -72,7 +78,7 @@ const route = () => {
             <div className="relative z-10">
                 <div className="">
 
-                    <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+                    <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"}  gap-8`}>
                         {/* Wrapper with dynamic size based on scroll */}
                         <div
                             className="w-52 h-52 md:w-60 md:h-60 rounded-none shadow-xl object-cover"
@@ -84,7 +90,7 @@ const route = () => {
                             />
                         </div>
 
-                        <div className="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
+                        <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:items-start lg:text-left "}  gap-4`}>
                             <span className="text-[#25d1da] text-xs">{"PUBLIC"}</span>
                             <h2 className="text-2xl md:text-3xl font-bold">
                                 Featured playlists for you
@@ -258,21 +264,26 @@ const route = () => {
                                                     </div>
                                                 </div>
                                                 <div className="min-w-0 flex-1 overflow-hidden">
-                                                    <div className={`font-normal ${false ? "text-[#25d1da]" : ""} text-sm truncate overflow-ellipsis`}>
-                                                        {track?.title}
-                                                    </div>
-                                                    <div className="text-xs text-gray-400 truncate overflow-ellipsis mt-0.5">
-                                                        {track?.singer}
-                                                    </div>
+                                                    <h3 className="text-sm font-normal truncate">
+                                                        {track.title}
+                                                    </h3>
+                                                    <p className="text-xs text-gray-400 mt-1 truncate">
+                                                        {track.singer}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </td>
                                         {/* <td className="hidden lg:table-cell text-gray-400 px-16 text-sm">{formatTime(track.createdAt)}</td> */}
-                                        <td className="hidden lg:table-cell text-gray-400 px-4 text-sm whitespace-nowrap">
+                                        <td className={`hidden ${panelSize > 23 ? "lg:hidden" : "lg:table-cell"}  text-gray-400 px-4 text-sm whitespace-nowrap`}>
                                             {"23 May 2025"}
                                         </td>
+                                        {/* 29 */}
 
-                                        <td className="hidden md:table-cell text-right text-gray-400 px-24 text-sm">{"5:45"}</td>
+                                        <td className={`hidden ${panelSize > 11 ? "md:hidden" : "md:table-cell"} lg:hidden text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
+                                        <td className={`hidden ${panelSize > 29 ? "lg:hidden" : "lg:table-cell"} text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
+
+
+
                                         <td className="text-right px-4 relative hidden sm:table-cell">
                                             <button
                                                 className={`cursor-pointer group/more hover:text-[#93D0D5] ${false ? "text-[#25d1da]" : "text-white"} flex-shrink-0 ml-2`}

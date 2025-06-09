@@ -73,7 +73,7 @@ const TrackLists = () => {
                         />
                     </div>
                     <div className="mt-2">
-                        <h3 className="text-sm  font-semibold truncate">
+                        <h3 className="text-sm font-normal truncate">
                             {playlist.title}
                         </h3>
                         <p className="text-xs text-gray-400 mt-1 truncate">
