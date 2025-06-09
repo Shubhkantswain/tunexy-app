@@ -45,7 +45,7 @@ const TrackSection = () => {
         return () => window.removeEventListener('resize', checkScrollability);
     }, []);
 
-
+ 
     return (
         <div className="text-white mt-10 md:mt-12">
             {/* Header */}

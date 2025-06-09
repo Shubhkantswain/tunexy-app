@@ -104,6 +104,57 @@ const route = () => {
         </div>
       </div>
 
+      <div className="mt-8 text-white">
+        <h2 className="text-lg font-semibold mb-4">Moods & Activities</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+          {[
+            { label: 'Moods', from: 'from-blue-600', to: 'to-cyan-600' },
+            { label: 'Activities', from: 'from-purple-600', to: 'to-pink-600' },
+            { label: 'Love', from: 'from-gray-800', to: 'to-slate-700' },
+            { label: 'Workout', from: 'from-cyan-600', to: 'to-rose-600' },
+            { label: 'Party', from: 'from-purple-700', to: 'to-red-500' },
+            { label: 'Travel', from: 'from-emerald-400', to: 'to-yellow-600' },
+            { label: 'Chill', from: 'from-slate-400', to: 'to-slate-600' },
+            { label: 'Happy', from: 'from-purple-600', to: 'to-yellow-400' },
+            { label: 'Wellness', from: 'from-indigo-800', to: 'to-orange-300' },
+            { label: 'Sleep', from: 'from-blue-900', to: 'to-gray-500' },
+            { label: 'At the Movies', from: 'from-indigo-900', to: 'to-rose-700' },
+          ].map(({ label, from, to }) => (
+            <button
+              key={label}
+              className={`rounded-md px-4 py-4 w-full font-semibold text-sm bg-gradient-to-r ${from} ${to} hover:scale-[1.02] transition-transform`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-8 text-white">
+        <h2 className="text-lg font-semibold mb-4">Music By Genre</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+          {[
+            { label: 'Moods', from: 'from-blue-600', to: 'to-cyan-600' },
+            { label: 'Activities', from: 'from-purple-600', to: 'to-pink-600' },
+            { label: 'Love', from: 'from-gray-800', to: 'to-slate-700' },
+            { label: 'Workout', from: 'from-cyan-600', to: 'to-rose-600' },
+            { label: 'Party', from: 'from-purple-700', to: 'to-red-500' },
+            { label: 'Travel', from: 'from-emerald-400', to: 'to-yellow-600' },
+            { label: 'Chill', from: 'from-slate-400', to: 'to-slate-600' },
+            { label: 'Happy', from: 'from-purple-600', to: 'to-yellow-400' },
+            { label: 'Wellness', from: 'from-indigo-800', to: 'to-orange-300' },
+            { label: 'Sleep', from: 'from-blue-900', to: 'to-gray-500' },
+            { label: 'At the Movies', from: 'from-indigo-900', to: 'to-rose-700' },
+          ].map(({ label, from, to }) => (
+            <button
+              key={label}
+              className={`rounded-md px-4 py-4 w-full font-semibold text-sm bg-gradient-to-r ${from} ${to} hover:scale-[1.02] transition-transform`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
       <ListeningInterface listening={listening} onStopListening={stopListening} />
     </>
   )

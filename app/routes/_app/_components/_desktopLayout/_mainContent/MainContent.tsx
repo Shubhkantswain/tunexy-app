@@ -78,7 +78,7 @@ const MainContent: React.FC<MainContentProps> = ({ isExpanded, onMinimize }) => 
     };
 
     return (
-        <div className="flex-1  overflow-hidden hidden md:flex pt-[56px] pb-[75px]">
+        <div className="flex-1 overflow-hidden hidden md:flex pt-[56px] pb-[75px]">
             <div ref={containerRef} className="flex w-full h-full px-[5px]">
                 {
                     !isExpanded ? (
