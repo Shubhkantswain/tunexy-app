@@ -84,13 +84,13 @@ const Tracklist = () => {
                         {tracks.map((playlist) => (
                             <div
                                 key={playlist.id}
-                                className="shrink-0 w-[140px] sm:w-[150px] md:w-[150px] lg:w-[160px]"
+                                className="shrink-0 w-[150px] sm:w-[160px] md:w-[170px] lg:w-[180px]"
                             >
                                 <div className="rounded overflow-hidden">
                                     <img
                                         src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d"
                                         alt={playlist.title}
-                                        className="w-full h-[140px] sm:h-[150px] md:h-[150px] lg:h-[160px] object-cover rounded"
+                                        className="w-full h-[150px] sm:h-[160px] md:h-[170px] lg:h-[180px] object-cover rounded"
                                     />
                                 </div>
                                 <div className="mt-2">
