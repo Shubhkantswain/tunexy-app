@@ -56,32 +56,18 @@ const route = () => {
         },
     ];
 
-
-    const [show, setShow] = useState(false)
-
-    useEffect(() => {
-        setTimeout(() => {
-
-            setShow(true)
-        }, 1000)
-    }, [])
-
     return (
         <div className="text-white relative max-w-[90rem] mx-auto">
-            {
-                show && (
-                    <div
-                        className="absolute inset-0 bg-gradient-to-b from-transparent to-black z-0"
-                        style={{
-                            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 10%), url(${'https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg'})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center top',
-                            filter: 'blur(100px)',
-                            opacity: '0.9',
-                        }}
-                    />
-                )
-            }
+            <div
+                className="absolute inset-0 bg-gradient-to-b from-transparent to-black z-0"
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,1) 10%), url(${'https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg'})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center top',
+                    filter: 'blur(100px)',
+                    opacity: '0.9',
+                }}
+            />
 
             <div className="relative z-10">
                 <div className="">
