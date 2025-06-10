@@ -1,729 +1,290 @@
 
 // PlaylistPage.tsx
-import { Play, MoreHorizontal, Heart, HeartIcon } from 'lucide-react';
+import { Play, MoreHorizontal, Heart } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { usePanelSizeStore } from '~/store/usePanelSizeStore';
-import { MoreIcon, PauseIcon, PlayIcon } from '~/Svgs';
+import { HeartIcon, MoreIcon, PauseIcon, PlayIcon, ShareIcon } from '~/Svgs';
 
 const tracks = [
   {
+    id: 1,
     title: "Manchild",
     artist: "Sabrina Carpenter",
+    album: "Manchild [Explicit]",
     duration: "03:34",
+    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=60&h=60&fit=crop&crop=face",
     explicit: true,
+    hasLyrics: true
   },
   {
-    title: "Ordinary",
+    id: 2,
+    title: "Ordinary billie eilish billie eilish billie eilish",
     artist: "Alex Warren",
+    album: "Ordinary",
     duration: "03:07",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face",
     explicit: false,
+    hasLyrics: true
   },
   {
-    title: "Guess featuring Billie Eilish",
+    id: 3,
+    title: "Guess featuring billie eilish",
     artist: "Charli xcx & Billie Eilish",
+    album: "Guess featuring Billie Eilish",
     duration: "02:23",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
     explicit: true,
-  },
+    hasLyrics: true
+  }
 ];
-
 export default function PlaylistPage() {
 
-        const dropdownRef = useRef<HTMLDivElement>(null)
-    const [showDropdown, setShowDropdown] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [showDropdown, setShowDropdown] = useState(false)
 
-    const { panelSize, setPanelSize } = usePanelSizeStore()
+  const { panelSize, setPanelSize } = usePanelSizeStore()
 
-    console.log("panelSize", panelSize);
+  console.log("panelSize", panelSize);
 
 
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setShowDropdown(false)
-            }
-        }
-
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
-    }, [])
-
-    const toggleDropdown = () => {
-        setShowDropdown(!showDropdown)
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false)
+      }
     }
 
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown)
+  }
+
+  const img = 'https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg'
 
   return (
-<div className="min-h-screen text-white">
-  <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"} gap-8`}>
-    {/* Wrapper with dynamic size based on scroll */}
-    <div className="w-52 h-52 md:w-60 md:h-60 rounded-none shadow-xl object-cover">
-      <img
-        src={'https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg'}
-        alt={'res.title'}
-        className="w-full h-full rounded-none shadow-2xl object-cover"
-      />
-    </div>
+    <div className=" text-white">
+      {/* Background with gradient and blurred image */}
+    
 
-    <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:items-start lg:text-left "} gap-4`}>
-      <span className="text-[#25d1da] text-xs">{"PUBLIC"}</span>
-      <h2 className="text-2xl md:text-3xl font-bold">
-        Featured playlists for you
-      </h2>
+      {/* Black gradient overlay */}
+      <div className={`z-50 flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"} gap-8`}>
+        {/* in here */}
 
-      <div className="text-xs text-zinc-300">
-        Curated by FlowTune's Music Experts
-      </div>
-
-      <div className="text-xs text-zinc-300">
-        {"2 Hours . 5 Tracks"}
-      </div>
-
-      <div className="flex items-center gap-7 mt-4">
-        <button
-          className="flex items-center gap-2 bg-[#25d1da] hover:scale-105 hover:bg-[#93D0D5] text-black text-xs font-medium px-4 py-2 rounded-full transition-transform"
-        >
-          <PlayIcon width='16' height='16' />
-          Play
-        </button>
-
-        <div className='relative'>
-          <button
-            className="mt-1.5 hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
-            aria-label="More options"
-            onClick={async () => {
-              const shareUrl = window.location.href;
-              if (navigator.share) {
-                try {
-                  await navigator.share({
-                    title: document.title,
-                    url: shareUrl,
-                  });
-                } catch (error) {
-                  console.error("Error sharing:", error);
-                }
-              } else {
-                try {
-                  await navigator.clipboard.writeText(shareUrl);
-                  alert("Link copied to clipboard!");
-                } catch (error) {
-                  console.error("Failed to copy link:", error);
-                }
-              }
-            }}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-              <defs>
-                <path id="ic_action_shareandroid-a" d="M18,15 C16.798,15 15.732,15.542 14.999,16.381 L7.91,12.836 C7.967,12.566 8,12.287 8,12 C8,11.713 7.967,11.434 7.909,11.164 L14.998,7.619 C15.732,8.458 16.798,9 18,9 C20.209,9 22,7.209 22,5 C22,2.791 20.209,1 18,1 C15.791,1 14,2.791 14,5 C14,5.287 14.033,5.566 14.091,5.836 L7.001,9.381 C6.268,8.542 5.202,8 4,8 C1.791,8 0,9.791 0,12 C0,14.209 1.791,16 4,16 C5.202,16 6.268,15.458 7.001,14.619 L14.09,18.164 C14.033,18.434 14,18.713 14,19 C14,21.209 15.791,23 18,23 C20.209,23 22,21.209 22,19 C22,16.791 20.209,15 18,15 Z"></path>
-              </defs>
-              <g fill-rule="evenodd" fill="transparent">
-                <rect width="24" height="24"></rect>
-                <use href="#ic_action_shareandroid-a" fill="currentColor"></use>
-              </g>
-            </svg>
-          </button>
+        {/* Wrapper with dynamic size based on scroll */}
+        <div className="w-52 h-52 md:w-60 md:h-60 rounded-none shadow-xl object-cover">
+          <img
+            src={img}
+            alt={'res.title'}
+            className="w-full h-full rounded-none shadow-2xl object-cover"
+          />
         </div>
 
-        <div className="relative" ref={dropdownRef}>
-          <button
-            onClick={toggleDropdown}
-            className="mt-1.5  hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
-            aria-label="More options"
-          >
-            <MoreIcon width="20" height="20" />
-          </button>
+        <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:items-start lg:text-left "} gap-4`}>
+          <span className="text-[#25d1da] text-xs">{"PUBLIC"}</span>
+          <h2 className="text-2xl md:text-3xl font-bold">
+            Featured playlists for you
+          </h2>
 
-          {showDropdown && (
-            <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 w-64 z-50 transform transition-all duration-300 ease-in-out ${showDropdown ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-              <div className="bg-gradient-to-b from-neutral-950 to-neutral-900 rounded-md shadow-xl border border-[#2E3030]">
-                <div className="py-1">
-                  <button
-                    className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                  >
-                    Play
-                  </button>
-                  <div className="border-b border-[#2E3030]"></div>
+          <div className="text-xs text-zinc-300">
+            Curated by FlowTune's Music Experts
+          </div>
 
-                  <button
-                    className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                    onClick={async () => {
-                      const shareUrl = window.location.href;
-                      if (navigator.share) {
-                        try {
-                          await navigator.share({
-                            title: document.title,
-                            url: shareUrl,
-                          });
-                        } catch (error) {
-                          console.error("Error sharing:", error);
-                        }
-                      } else {
-                        try {
-                          await navigator.clipboard.writeText(shareUrl);
-                          alert("Link copied to clipboard!");
-                        } catch (error) {
-                          console.error("Failed to copy link:", error);
-                        }
-                      }
-                    }}
-                  >
-                    Share
-                  </button>
-                  <div className="border-b border-[#2E3030]"></div>
+          <div className="text-xs text-zinc-300">
+            {"2 Hours . 5 Tracks"}
+          </div>
 
-                  <button
-                    className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                    onClick={() => {
-                      setShowDropdown(false)
-                    }}
-                  >
-                    {false ? "Disable Repeat" : "Enable Repeat"}
-                  </button>
-                  <div className="border-b border-[#2E3030]"></div>
+          <div className="flex items-center gap-7 mt-4">
+            <button
+              className="flex items-center gap-2 bg-[#25d1da] hover:scale-105 hover:bg-[#93D0D5] text-black text-xs font-bold px-4 py-2 rounded-full transition-transform"
+            >
+              Play
+            </button>
 
-                  <button
-                    className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                  >
-                    Delete This Playlist
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div className="px-8 mt-10">
-    <table className="w-full">
-      <tbody>
-        {(tracks)?.map((track, index) => (
-          <tr
-            key={index}
-            className="hover:bg-[#29292A] group border-b border-[#2a2b2c] mt-4"
-          >
-            <td className="py-7 pl-4 pr-2">
-              <span>{index + 1}</span>
-            </td>
-            <td className="w-full max-w-0">
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 relative cursor-pointer">
-                  <img
-                    src={"https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg"}
-                    alt={track?.title}
-                    className="w-12 h-12 rounded-sm object-cover"
-                  />
-                  {/* Play button overlay */}
-                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
-                    <button className='hover:text-[#93D0D5] text-white'>
-                      {(false) ? (
-                        <PauseIcon width="20" height="20" />
-                      ) : (
-                        <PlayIcon width="20" height="20" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-                <div className="min-w-0 flex-1 overflow-hidden">
-                  <h3 className="text-sm font-normal truncate">
-                    {track.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 mt-1 truncate">
-                    {"track.singer"}
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td className={`hidden ${panelSize > 23 ? "lg:hidden" : "lg:table-cell"} text-gray-400 px-4 text-sm whitespace-nowrap`}>
-              {"23 May 2025"}
-            </td>
-
-            <td className={`hidden ${panelSize > 11 ? "md:hidden" : "md:table-cell"} lg:hidden text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
-            <td className={`hidden ${panelSize > 29 ? "lg:hidden" : "lg:table-cell"} text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
-
-            <td className="text-right px-4 relative hidden sm:table-cell">
+            <div className='relative'>
               <button
-                className={`cursor-pointer group/more hover:text-[#93D0D5] ${false ? "text-[#25d1da]" : "text-white"} flex-shrink-0 ml-2`}
-                onClick={async (e) => {
-                  e.stopPropagation();
+                className="mt-1.5 hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
+                aria-label="More options"
+                onClick={async () => {
+                  const shareUrl = window.location.href;
+                  if (navigator.share) {
+                    try {
+                      await navigator.share({
+                        title: document.title,
+                        url: shareUrl,
+                      });
+                    } catch (error) {
+                      console.error("Error sharing:", error);
+                    }
+                  } else {
+                    try {
+                      await navigator.clipboard.writeText(shareUrl);
+                      alert("Link copied to clipboard!");
+                    } catch (error) {
+                      console.error("Failed to copy link:", error);
+                    }
+                  }
                 }}
               >
-                <HeartIcon width="17" height="17" />
+                <ShareIcon width="24" height="24" />
+
               </button>
-            </td>
-            <td className="text-right px-4 relative">
+            </div>
+
+            <div className="relative" ref={dropdownRef}>
               <button
-                className="cursor-pointer relative group/more hover:text-[#93D0D5] flex-shrink-0 ml-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
+                onClick={toggleDropdown}
+                className="mt-1.5  hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
+                aria-label="More options"
               >
                 <MoreIcon width="20" height="20" />
               </button>
 
-              {showDropdown === index && (
-                <div
-                  ref={dropdownRef}
-                  className={`absolute right-0 top-0 w-64 z-50 transform transition-all duration-300 ease-in-out ${showDropdown === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
-                >
+              {showDropdown && (
+                <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 w-64 z-50 transform transition-all duration-300 ease-in-out ${showDropdown ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                   <div className="bg-gradient-to-b from-neutral-950 to-neutral-900 rounded-md shadow-xl border border-[#2E3030]">
                     <div className="py-1">
                       <button
                         className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                        }}
                       >
-                        Add To Playlist
+                        Play
                       </button>
-
                       <div className="border-b border-[#2E3030]"></div>
 
                       <button
                         className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                        onClick={(e) => {
-                          e.stopPropagation()
+                        onClick={async () => {
+                          const shareUrl = window.location.href;
+                          if (navigator.share) {
+                            try {
+                              await navigator.share({
+                                title: document.title,
+                                url: shareUrl,
+                              });
+                            } catch (error) {
+                              console.error("Error sharing:", error);
+                            }
+                          } else {
+                            try {
+                              await navigator.clipboard.writeText(shareUrl);
+                              alert("Link copied to clipboard!");
+                            } catch (error) {
+                              console.error("Failed to copy link:", error);
+                            }
+                          }
                         }}
                       >
-                        {false ? "Remove From Queue" : "Add To Queue"}
+                        Share
                       </button>
-
                       <div className="border-b border-[#2E3030]"></div>
 
                       <button
                         className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                        onClick={async (e) => {
-                          e.preventDefault()
+                        onClick={() => {
+                          setShowDropdown(false)
                         }}
                       >
-                        {
-                          false ? "Unlike This Track" : "Like This Track"
-                        }
+                        {false ? "Disable Repeat" : "Enable Repeat"}
                       </button>
-
                       <div className="border-b border-[#2E3030]"></div>
 
                       <button
                         className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
                       >
-                        {
-                          (false) ? "Pause This Track" : "Play This Track"
-                        }
-                      </button>
-
-                      <button
-                        className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                        }}
-                      >
-                        Remove This Track
+                        Delete This Playlist
                       </button>
                     </div>
                   </div>
                 </div>
               )}
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-white mt-10">
+        <div className="divide-y divide-[#2a2b2c]">
+          {tracks.map((track) => (
+            <div
+              key={track.id}
+              className="flex items-center justify-between p-4 hover:bg-[#2B2C2C] transition-colors group cursor-pointer"
+            >
+              {/* Left side - Track number, image, and info */}
+              <div className="flex items-center space-x-4 flex-1 min-w-0">
+                <div className="w-4 text-gray-400 text-sm font-medium -mr-2">
+                  {track.id}
+                </div>
+
+                {/* Image with Play button on hover */}
+                <div className="relative group">
+                  <img
+                    src={track.image}
+                    alt={`${track.title} artwork`}
+                    className="w-12 h-12 rounded object-cover"
+                  />
+
+                  {/* Play button shown on hover */}
+                  <button
+                    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    <PlayIcon width="20" height="20" />
+                  </button>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center space-x-2">
+                    <h3 className="text-sm font-medium truncate">{track.title}</h3>
+                  </div>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <p className="text-xs text-gray-400 mt-1 truncate">
+                      {track.artist}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right side - Duration, heart, more options */}
+              <div className="flex items-center gap-24 flex-shrink-0 min-w-fit">
+                {/* Middle - Album name */}
+                <div className={`hidden ${panelSize >= 23 ? "lg:hidden" : " lg:block"}  flex-1 px-2`}>
+                  <p className="text-white text-sm truncate">{"23 may 2025"}</p>
+                </div>
+
+                <span
+                  className={`hidden lg:hidden px-2 ${panelSize > 12 ? "md:hidden" : "md:block"
+                    } text-white text-sm font-medium min-w-0`}
+                >
+                  {track.duration}
+                </span>
+
+                <span
+                  className={`hidden px-2 ${panelSize > 30 ? "lg:hidden" : "lg:block"
+                    } text-white text-sm font-medium min-w-0`}
+                >
+                  {track.duration}
+                </span>
+
+                <div className="flex gap-7 flex-shrink-0 px-2">
+                  <button className='hidden sm:block'>
+                    {/* <Heart className="w-5 h-5 text-gray-400 hover:text-white" /> */}
+                    <HeartIcon width="20" height="20" />
+                  </button>
+                  <button>
+                    <MoreIcon width="20" height="20" />
+
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
-// import { HeartIcon } from 'lucide-react';
-// import React, { useEffect, useRef, useState } from 'react'
-// import { usePanelSizeStore } from '~/store/usePanelSizeStore';
-// import { MoreIcon, PauseIcon, PlayIcon } from '~/Svgs';
 
-// const route = () => {
-//     const dropdownRef = useRef<HTMLDivElement>(null)
-//     const [showDropdown, setShowDropdown] = useState(false)
-
-//     const { panelSize, setPanelSize } = usePanelSizeStore()
-
-//     console.log("panelSize", panelSize);
-
-
-//     useEffect(() => {
-//         function handleClickOutside(event: MouseEvent) {
-//             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-//                 setShowDropdown(false)
-//             }
-//         }
-
-//         document.addEventListener('mousedown', handleClickOutside)
-//         return () => {
-//             document.removeEventListener('mousedown', handleClickOutside)
-//         }
-//     }, [])
-
-//     const toggleDropdown = () => {
-//         setShowDropdown(!showDropdown)
-//     }
-
-//     const tracks = [
-//         {
-//             title: "Night Drive the best song from my",
-//             singer: "Ava James",
-//             coverImageUrl: "https://source.unsplash.com/100x100/?music,night",
-//             hasLiked: true,
-//         },
-//         {
-//             title: "Golden Hour",
-//             singer: "Alex Rivers",
-//             coverImageUrl: "https://source.unsplash.com/100x100/?music,sunset",
-//             hasLiked: false,
-//         },
-//         {
-//             title: "Chasing Dreams",
-//             singer: "Nova Lane",
-//             coverImageUrl: "https://source.unsplash.com/100x100/?music,stars",
-//             hasLiked: false,
-//         },
-//         {
-//             title: "Echoes of You",
-//             singer: "Miles Carter",
-//             coverImageUrl: "https://source.unsplash.com/100x100/?music,city",
-//             hasLiked: true,
-//         },
-//         {
-//             title: "Into the Mist",
-//             singer: "Luna Hale",
-//             coverImageUrl: "https://source.unsplash.com/100x100/?music,fog",
-//             hasLiked: false,
-//         },
-//     ];
-
-//     return (
-//         <div className="text-white">
-          
-
-//             <div className="relative z-10">
-//                 <div className="">
-
-                    // <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"}  gap-8`}>
-                    //     {/* Wrapper with dynamic size based on scroll */}
-                    //     <div
-                    //         className="w-52 h-52 md:w-60 md:h-60 rounded-none shadow-xl object-cover"
-                    //     >
-                    //         <img
-                    //             src={'https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg'}
-                    //             alt={'res.title'}
-                    //             className="w-full h-full rounded-none shadow-2xl object-cover"
-                    //         />
-                    //     </div>
-
-                    //     <div className={`flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:items-start lg:text-left "}  gap-4`}>
-                    //         <span className="text-[#25d1da] text-xs">{"PUBLIC"}</span>
-                    //         <h2 className="text-2xl md:text-3xl font-bold">
-                    //             Featured playlists for you
-                    //         </h2>
-
-                    //         <div className="text-xs text-zinc-300">
-                    //             Curated by FlowTune's Music Experts
-                    //         </div>
-
-                    //         <div className="text-xs text-zinc-300">
-                    //             {"2 Hours . 5 Tracks"}
-                    //         </div>
-
-                    //         <div className="flex items-center gap-7 mt-4">
-                    //             <button
-
-                    //                 className="flex items-center gap-2 bg-[#25d1da] hover:scale-105 hover:bg-[#93D0D5] text-black text-xs font-medium px-4 py-2 rounded-full transition-transform"
-                    //             >
-                    //                 <PlayIcon width='16' height='16' />
-                    //                 Play
-                    //             </button>
-
-                    //             <div className='relative'>
-                    //                 <button
-                    //                     className="mt-1.5 hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
-                    //                     aria-label="More options"
-                    //                     onClick={async () => {
-                    //                         const shareUrl = window.location.href;
-                    //                         if (navigator.share) {
-                    //                             try {
-                    //                                 await navigator.share({
-                    //                                     title: document.title,
-                    //                                     url: shareUrl,
-                    //                                 });
-                    //                             } catch (error) {
-                    //                                 console.error("Error sharing:", error);
-                    //                             }
-                    //                         } else {
-                    //                             try {
-                    //                                 await navigator.clipboard.writeText(shareUrl);
-                    //                                 alert("Link copied to clipboard!");
-                    //                             } catch (error) {
-                    //                                 console.error("Failed to copy link:", error);
-                    //                             }
-                    //                         }
-                    //                     }}
-                    //                 >
-                    //                     {/* Tooltip inside the button */}
-                    //                     {/* <Tooltip text='Share' className='-top-8' /> */}
-
-
-                    //                     {/* <MoreIcon width="2/4" height="24" /> */}
-                    //                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><defs><path id="ic_action_shareandroid-a" d="M18,15 C16.798,15 15.732,15.542 14.999,16.381 L7.91,12.836 C7.967,12.566 8,12.287 8,12 C8,11.713 7.967,11.434 7.909,11.164 L14.998,7.619 C15.732,8.458 16.798,9 18,9 C20.209,9 22,7.209 22,5 C22,2.791 20.209,1 18,1 C15.791,1 14,2.791 14,5 C14,5.287 14.033,5.566 14.091,5.836 L7.001,9.381 C6.268,8.542 5.202,8 4,8 C1.791,8 0,9.791 0,12 C0,14.209 1.791,16 4,16 C5.202,16 6.268,15.458 7.001,14.619 L14.09,18.164 C14.033,18.434 14,18.713 14,19 C14,21.209 15.791,23 18,23 C20.209,23 22,21.209 22,19 C22,16.791 20.209,15 18,15 Z"></path></defs><g fill-rule="evenodd" fill="transparent"><rect width="24" height="24"></rect><use href="#ic_action_shareandroid-a" fill="currentColor"></use></g></svg>
-
-
-                    //                 </button>
-                    //             </div>
-
-                    //             <div className="relative" ref={dropdownRef}>
-                    //                 <button
-                    //                     onClick={toggleDropdown}
-                    //                     className="mt-1.5  hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
-                    //                     aria-label="More options"
-                    //                 >
-                    //                     {/* Tooltip inside the button */}
-
-                    //                     {/* <Tooltip text='More' className='-top-7' /> */}
-
-
-                    //                     <MoreIcon width="20" height="20" />
-                    //                 </button>
-
-                    //                 {showDropdown && (
-                    //                     <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 w-64 z-50 transform transition-all duration-300 ease-in-out ${showDropdown ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-                    //                         <div className="bg-gradient-to-b from-neutral-950 to-neutral-900 rounded-md shadow-xl border border-[#2E3030]">
-                    //                             <div className="py-1">
-
-
-                    //                                 <button
-                    //                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-
-                    //                                 >
-                    //                                     Play
-                    //                                 </button>
-                    //                                 <div className="border-b border-[#2E3030]"></div>
-
-
-                    //                                 <button
-                    //                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                    //                                     onClick={async () => {
-                    //                                         const shareUrl = window.location.href;
-                    //                                         if (navigator.share) {
-                    //                                             try {
-                    //                                                 await navigator.share({
-                    //                                                     title: document.title,
-                    //                                                     url: shareUrl,
-                    //                                                 });
-                    //                                             } catch (error) {
-                    //                                                 console.error("Error sharing:", error);
-                    //                                             }
-                    //                                         } else {
-                    //                                             try {
-                    //                                                 await navigator.clipboard.writeText(shareUrl);
-                    //                                                 alert("Link copied to clipboard!");
-                    //                                             } catch (error) {
-                    //                                                 console.error("Failed to copy link:", error);
-                    //                                             }
-                    //                                         }
-                    //                                     }}
-                    //                                 >
-                    //                                     Share
-                    //                                 </button>
-                    //                                 <div className="border-b border-[#2E3030]"></div>
-
-                    //                                 <button
-                    //                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-                    //                                     onClick={() => {
-
-                    //                                         setShowDropdown(false)
-                    //                                     }}
-                    //                                 >
-                    //                                     {false ? "Disable Repeat" : "Enable Repeat"}
-                    //                                 </button>
-                    //                                 <div className="border-b border-[#2E3030]"></div>
-
-
-                    //                                 <button
-                    //                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-
-                    //                                 >
-                    //                                     Delete This Playlist
-                    //                                 </button>
-                    //                             </div>
-                    //                         </div>
-                    //                     </div>
-                    //                 )}
-                    //             </div>
-                    //         </div>
-                    //     </div>
-                    // </div>
-
-//                     {/* <PlaylistTrackItems res={res} handleControll={handleControll} initialized={initialized} setInitialized={setInitialized} /> */}
-            //         <div className="pb-8 mt-7 overflow-visible">
-            //             <table className="w-full">
-            //                 <tbody>
-            //                     {(tracks)?.map((track, index) => (
-            //                         <tr
-            //                             key={index}
-            //                             className="hover:bg-[#29292A] group border-b border-[#2a2b2c] mt-4"
-            //                         >
-            //                             <td className="py-7 pl-4 pr-2"> {/* Added pr-2 for spacing */}
-            //                                 <span>{index + 1}</span>
-            //                             </td>
-            //                             <td className="w-full max-w-0">
-            //                                 <div className="flex items-center gap-4">
-            //                                     <div className="flex-shrink-0 relative cursor-pointer">
-            //                                         <img
-            //                                             src={"https://m.media-amazon.com/images/I/51TZEpzJOYL._UX250_FMwebp_QL85_.jpg"}
-            //                                             alt={track?.title}
-            //                                             className="w-12 h-12 rounded-sm object-cover"
-            //                                         />
-            //                                         {/* Play button overlay */}
-            //                                         <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded">
-            //                                             <button className='hover:text-[#93D0D5] text-white'>
-            //                                                 {(false) ? (
-            //                                                     <PauseIcon width="20" height="20" />
-            //                                                 ) : (
-            //                                                     <PlayIcon width="20" height="20" />
-            //                                                 )}
-            //                                             </button>
-            //                                         </div>
-            //                                     </div>
-            //                                     <div className="min-w-0 flex-1 overflow-hidden">
-            //                                         <h3 className="text-sm font-medium truncate">
-            //                                             {track.title}
-            //                                         </h3>
-            //                                         <p className="text-xs text-gray-400 mt-1 truncate">
-            //                                             {track.singer}
-            //                                         </p>
-            //                                     </div>
-            //                                 </div>
-            //                             </td>
-            //                             {/* <td className="hidden lg:table-cell text-gray-400 px-16 text-sm">{formatTime(track.createdAt)}</td> */}
-            //                             <td className={`hidden ${panelSize > 23 ? "lg:hidden" : "lg:table-cell"}  text-gray-400 px-4 text-sm whitespace-nowrap`}>
-            //                                 {"23 May 2025"}
-            //                             </td>
-            //                             {/* 29 */}
-
-            //                             <td className={`hidden ${panelSize > 11 ? "md:hidden" : "md:table-cell"} lg:hidden text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
-            //                             <td className={`hidden ${panelSize > 29 ? "lg:hidden" : "lg:table-cell"} text-right text-gray-400 px-24 text-sm`}>{"5:45"}</td>
-
-
-
-            //                             <td className="text-right px-4 relative hidden sm:table-cell">
-            //                                 <button
-            //                                     className={`cursor-pointer group/more hover:text-[#93D0D5] ${false ? "text-[#25d1da]" : "text-white"} flex-shrink-0 ml-2`}
-            //                                     onClick={async (e) => {
-            //                                         e.stopPropagation();
-            //                                     }}
-            //                                 >
-
-
-            //                                     <HeartIcon width="17" height="17" />
-            //                                 </button>
-
-            //                             </td>
-            //                             <td className="text-right px-4 relative">
-            //                                 <button
-            //                                     className="cursor-pointer relative group/more hover:text-[#93D0D5] flex-shrink-0 ml-2"
-            //                                     onClick={(e) => {
-            //                                         e.stopPropagation();
-            //                                     }}
-            //                                 >
-            //                                     <MoreIcon width="20" height="20" />
-            //                                 </button>
-
-            //                                 {showDropdown === index && (
-            //                                     <div
-            //                                         ref={dropdownRef}
-            //                                         className={`absolute right-0 top-0 w-64 z-50 transform transition-all duration-300 ease-in-out ${showDropdown === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
-            //                                     >
-            //                                         <div className="bg-gradient-to-b from-neutral-950 to-neutral-900 rounded-md shadow-xl border border-[#2E3030]">
-            //                                             <div className="py-1">
-            //                                                 <button
-            //                                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-            //                                                     onClick={(e) => {
-            //                                                         e.stopPropagation()
-
-            //                                                     }}
-
-            //                                                 >
-            //                                                     Add To Playlist
-
-            //                                                 </button>
-
-            //                                                 <div className="border-b border-[#2E3030]"></div>
-
-            //                                                 <button
-            //                                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-            //                                                     onClick={(e) => {
-            //                                                         e.stopPropagation()
-            //                                                     }}
-            //                                                 >
-            //                                                     {false ? "Remove From Queue" : "Add To Queue"}
-            //                                                 </button>
-
-            //                                                 <div className="border-b border-[#2E3030]"></div>
-
-            //                                                 <button
-            //                                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-            //                                                     onClick={async (e) => {
-            //                                                         e.preventDefault()
-            //                                                     }}
-            //                                                 >
-            //                                                     {
-            //                                                         track.hasLiked ? "Unlike This Track" : "Like This Track"
-            //                                                     }
-
-            //                                                 </button>
-
-            //                                                 <div className="border-b border-[#2E3030]"></div>
-
-            //                                                 <button
-            //                                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-
-            //                                                 >
-            //                                                     {
-            //                                                         (false) ? "Pause This Track" : "Play This Track"
-            //                                                     }
-
-            //                                                 </button>
-
-
-            //                                                 <button
-            //                                                     className="flex items-center justify-between w-full text-left px-4 py-4 text-sm text-gray-200 hover:bg-[#29292A] hover:text-white"
-            //                                                     onClick={(e) => {
-            //                                                         e.stopPropagation()
-            //                                                     }}
-            //                                                 >
-            //                                                     Remove This Track
-
-            //                                                 </button>
-
-            //                                             </div>
-            //                                         </div>
-
-            //                                     </div>
-            //                                 )}
-            //                             </td>
-            //                         </tr>
-            //                     ))}
-            //                 </tbody>
-            //             </table>
-
-
-
-
-
-            //         </div>
-
-            //     </div>
-            // </div>
-//         </div>
-//     )
-// }
-
-// export default route
