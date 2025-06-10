@@ -96,12 +96,12 @@ const LibraryItems: React.FC<LibraryItemsProps> = ({ panelSize, view }) => {
                             className="flex items-center gap-3 p-2 rounded-sm hover:bg-[#1F1F1F] transition-colors cursor-pointer group"
                         >
                             <div className="flex-1 min-w-0">
-                                <div className="text-white font-medium text-sm truncate">
+                                <h3 className="text-white font-medium text-sm truncate">
                                     {item.title}
-                                </div>
-                                <div className="text-gray-400 text-xs truncate">
+                                </h3>
+                                <p className="text-gray-400 text-xs truncate">
                                     {item.subtitle}
-                                </div>
+                                </p>
                             </div>
                             {item.type === 'folder' && (
                                 <div className="text-gray-400">
@@ -191,12 +191,12 @@ const LibraryItems: React.FC<LibraryItemsProps> = ({ panelSize, view }) => {
 
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <div className="text-white font-medium text-sm truncate">
+                                    <h3 className="text-white font-medium text-sm truncate">
                                         {item.title}
-                                    </div>
-                                    <div className="text-gray-400 text-xs truncate">
+                                    </h3>
+                                    <p className="text-gray-400 text-xs truncate">
                                         {item.subtitle}
-                                    </div>
+                                    </p>
                                 </div>
                                 {item.type === 'folder' && (
                                     <div className="text-gray-400">

@@ -6,7 +6,7 @@ import { useState } from 'react';
 const DesktopLayout = () => {
     const [isExpanded, setIsExpanded] = useState(false);
 
-    const onExpand = () => setIsExpanded(true);    
+    const onExpand = () => setIsExpanded(true);
     const onMinimize = () => setIsExpanded(false);
 
     return (
