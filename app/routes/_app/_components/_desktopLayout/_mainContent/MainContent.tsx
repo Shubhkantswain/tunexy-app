@@ -101,7 +101,7 @@ const MainContent: React.FC<MainContentProps> = ({ isExpanded, onMinimize }) => 
                                 style={{ width: `${100 - panelSize}%` }}
                                 className="h-full bg-[#121212] rounded-md ml-0.5 custom-scrollbar overflow-y-auto"
                             >
-                                <div className="p-8 max-w-[90rem] mx-auto">
+                                <div className=" ">
                                     <Outlet />
                                 </div>
                             </div>
