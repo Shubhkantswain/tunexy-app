@@ -16,7 +16,7 @@ const AccountDrowDown = () => {
     return (
         <div
             className="z-[100] absolute right-0 mt-3 w-64 rounded-md bg-[#282828] shadow-xl 
-                 border border-[#1f1f1f] max-h-[calc(97vh-120px)] overflow-y-auto"
+                 border border-[#1f1f1f] max-h-[calc(90vh-120px)] overflow-y-auto"
         >
             {dropdownItems.map((item, index) => (
                 <div
