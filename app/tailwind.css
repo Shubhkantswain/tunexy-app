@@ -114,7 +114,7 @@ body {
 
 @media (max-height: 500px) {
   .custom-img {
-    width: 12rem; /* or w-24 */
-    height: 12rem; /* or h-24 */
+    width: 13rem; /* or w-24 */
+    height: 13rem; /* or h-24 */
   }
 }
