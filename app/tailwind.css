@@ -111,3 +111,10 @@ body {
 .font-chane {
   font-size: 0.65rem 
 }
+
+@media (max-height: 500px) {
+  .custom-img {
+    width: 12rem; /* or w-24 */
+    height: 12rem; /* or h-24 */
+  }
+}

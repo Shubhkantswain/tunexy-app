@@ -50,11 +50,9 @@ const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ onMinimize }) =
                     <img
                         src="https://m.media-amazon.com/images/I/410ywXj9+AL._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg"
                         alt="Music Artist"
-                        className="w-64 h-64 object-cover rounded-xl"
+                        className="w-64 h-64 object-cover rounded-xl custom-img"
                     />
-                    <div className="absolute bottom-4 left-4 bg-white px-2 py-1 text-black font-bold text-xs rounded shadow">
-                        COLORS<br />STUDIOS
-                    </div>
+                  
                 </div>
             </div>
         </div>
