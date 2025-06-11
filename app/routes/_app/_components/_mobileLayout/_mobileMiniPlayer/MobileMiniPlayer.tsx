@@ -8,7 +8,7 @@ interface MobileMiniPlayerProps {
 }
 
 const MobileMiniPlayer: React.FC<MobileMiniPlayerProps> = ({ onScreenExpand }) => {
-    const { dominantColor } = useImageColor("https://m.media-amazon.com/images/I/61jOX57qA+L._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg")
+    const { dominantColor } = useImageColor("https://m.media-amazon.com/images/S/dmp-catalog-images-prod/images/674830a5-23ed-490f-b1cf-681a68570099/674830a5-23ed-490f-b1cf-681a68570099--1751145004._UX358_FMwebp_QL85_.jpg")
 
     return (
         <>

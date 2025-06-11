@@ -4,7 +4,7 @@ import { Play, MoreHorizontal, Heart } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import useImageColor from '~/hooks/useImgColor';
 import { usePanelSizeStore } from '~/store/usePanelSizeStore';
-import { HeartIcon, MoreIcon, PauseIcon, PlayIcon, ShareIcon } from '~/Svgs';
+import { CompactListIcon, DefaultListIcon, HeartIcon, MoreIcon, PauseIcon, PlayIcon, ShareIcon } from '~/Svgs';
 
 const tracks = [
   {
@@ -37,98 +37,7 @@ const tracks = [
     explicit: true,
     hasLyrics: true
   },
-  {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  },
-  {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  }, {
-    id: 3,
-    title: "Guess featuring billie eilish",
-    artist: "Charli xcx & Billie Eilish",
-    album: "Guess featuring Billie Eilish",
-    duration: "02:23",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face",
-    explicit: true,
-    hasLyrics: true
-  },
+ 
 ];
 export default function PlaylistPage() {
 
@@ -157,9 +66,12 @@ export default function PlaylistPage() {
     setShowDropdown(!showDropdown)
   }
 
-  const img = 'https://m.media-amazon.com/images/I/61jOX57qA+L._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg'
+  const img = 'https://m.media-amazon.com/images/I/61pId5QmuDL._UX250_FMwebp_QL85_.jpg'
   const { dominantColor } = useImageColor(img)
   console.log("d", dominantColor);
+
+
+
 
 
   return (
@@ -171,7 +83,7 @@ export default function PlaylistPage() {
           background: `linear-gradient(to bottom, ${dominantColor}, #121212, #121212)`,
         }}
 
-        className={`h-[950px] md:h-[1050px] ${panelSize > 33 ? "lg:h-[1050px]":"lg:h-[600px]"} `}
+        className={`h-[950px] md:h-[1050px] ${panelSize > 33 ? "lg:h-[1050px]" : "lg:h-[600px]"} `}
       >
         <div className={`max-w-[90rem] mx-auto text-white p-4 md:p-6`}>
           <div className={`z-0 flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"} gap-8`}>
@@ -179,7 +91,7 @@ export default function PlaylistPage() {
               <img
                 src={img}
                 alt={'res.title'}
-                className="w-full h-full rounded-none shadow-2xl object-cover"
+                className="w-full h-full rounded-sm shadow-2xl object-cover"
               />
             </div>
 
@@ -199,14 +111,14 @@ export default function PlaylistPage() {
 
               <div className="flex items-center gap-7 mt-4">
                 <button
-                  className="flex items-center gap-2 bg-[#25d1da] hover:scale-105 hover:bg-[#93D0D5] text-black text-xs font-bold px-4 py-2 rounded-full transition-transform"
+                  className="flex items-center gap-2 bg-[#25d1da] hover:scale-105 hover:bg-[#93D0D5] text-black text-sm font-bold px-4 py-2 rounded-full transition-transform"
                 >
                   Play
                 </button>
 
                 <div className='relative'>
                   <button
-                    className="mt-1.5 hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
+                    className=" hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
                     aria-label="More options"
                     onClick={async () => {
                       const shareUrl = window.location.href;
@@ -229,15 +141,23 @@ export default function PlaylistPage() {
                       }
                     }}
                   >
-                    <ShareIcon width="24" height="24" />
+                    <ShareIcon width="22" height="22" />
 
                   </button>
                 </div>
 
+                <button
+                    className="hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
+                    aria-label="More options"
+                  >
+                    <DefaultListIcon width="15" height="15" />
+                  </button>
+
+
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={toggleDropdown}
-                    className="mt-1.5  hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
+                    className="mt-1 hover:text-[#93D0D5] rounded-full transition-colors focus:outline-none group"
                     aria-label="More options"
                   >
                     <MoreIcon width="20" height="20" />
@@ -283,6 +203,8 @@ export default function PlaylistPage() {
                     </div>
                   )}
                 </div>
+
+
               </div>
             </div>
 
@@ -291,7 +213,7 @@ export default function PlaylistPage() {
         </div>
       </div>
 
-      <div className={`-mt-[485px] md:-mt-[550px] ${panelSize > 33 ? "lg:-mt-[550px]": "lg:-mt-[330px]"} `}>
+      <div className={`-mt-[485px] md:-mt-[550px] ${panelSize > 33 ? "lg:-mt-[550px]" : "lg:-mt-[330px]"} `}>
         <div className='p-4 md:p-6 max-w-[90rem] mx-auto'>
           <div className="text-white ">
             <div className="divide-y divide-[#2a2b2c]">

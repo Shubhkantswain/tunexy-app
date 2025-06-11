@@ -11,10 +11,10 @@ const TrackArtInfo = () => {
                 <div className="relative w-full h-full mt-3">
                     <img
                         src={
-                            'https://m.media-amazon.com/images/I/518f7hQbCqL._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg'
+                            'https://m.media-amazon.com/images/S/dmp-catalog-images-prod/images/674830a5-23ed-490f-b1cf-681a68570099/674830a5-23ed-490f-b1cf-681a68570099--1751145004._UX358_FMwebp_QL85_.jpg'
                         }
                         alt="Album art"
-                        className="absolute inset-0 w-full h-full object-cover rounded-sm"
+                        className="absolute inset-0 w-full h-full object-cover rounded-sm shadow-2xl"
                     />
                 </div>
             </div>
