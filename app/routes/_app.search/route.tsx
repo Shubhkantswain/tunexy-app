@@ -61,7 +61,7 @@ const route = () => {
 
 
   return (
-    <>
+    <div className='p-4 md:p-6'>
       <div className="flex md:hidden items-center text-white bg-[#1f1f1f] px-4 py-[8px] rounded-md w-full">
         <input
           type="text"
@@ -156,7 +156,7 @@ const route = () => {
         </div>
       </div>
       <ListeningInterface listening={listening} onStopListening={stopListening} />
-    </>
+    </div>
   )
 }
 

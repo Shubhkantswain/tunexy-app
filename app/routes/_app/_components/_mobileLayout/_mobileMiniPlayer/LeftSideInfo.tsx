@@ -2,7 +2,7 @@ import React from 'react'
 
 const LeftSideInfo = () => {
     return (
-        <div className="flex items-center gap-4 min-w-0"> {/* allow children to truncate */}
+        <div className="flex items-center gap-5 min-w-0"> {/* allow children to truncate */}
             <img
                 src="https://m.media-amazon.com/images/I/81NhNYtCisL._SX472_SY472_BL0_QL100__UX56_FMwebp_QL85_.jpg"
                 alt="Song Thumbnail"

@@ -65,7 +65,7 @@ const playlists = [
 
 const LibraryPage = () => {
   return (
-    <div className="min-h-screen text-white">
+    <div className="min-h-screen text-white p-4 md:p-6">
       <h2 className="text-lg md:text-xl mb-4 font-bold">
         Library
       </h2>

@@ -1,36 +1,41 @@
 import React from 'react'
 import LeftSideInfo from './LeftSideInfo';
 import PlaybackControls from './PlaybackControls';
+import useImageColor from '~/hooks/useImgColor';
 
 interface MobileMiniPlayerProps {
     onScreenExpand: () => void;
 }
 
 const MobileMiniPlayer: React.FC<MobileMiniPlayerProps> = ({ onScreenExpand }) => {
+    const { dominantColor } = useImageColor("https://m.media-amazon.com/images/I/61jOX57qA+L._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg")
+
     return (
         <>
             {
                 true && (
                     <footer
                         onClick={onScreenExpand}
-                        className="fixed bottom-16 mb-2.5 rounded-md left-0 right-0 z-20 h-[60px] w-[95%] mx-auto overflow-hidden">
-                        {/* Background with blur */}
-                        <div className="absolute inset-0 z-0">
-                            <img
-                                src="https://m.media-amazon.com/images/I/81NhNYtCisL._SX472_SY472_BL0_QL100__UX56_FMwebp_QL85_.jpg"
-                                alt="Background"
-                                className="w-full h-full object-cover blur-md opacity-60"
-                            />
-                        </div>
+                        className="fixed bottom-16 mb-2.5 rounded-md left-0 right-0 z-20 h-[60px] w-[95%] mx-auto overflow-hidden bg-black"
+                    >
+                        {/* Background color */}
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                backgroundColor: `${dominantColor}`,
+                            }}
+                        />
 
+                        {/* Dark overlay to reduce brightness */}
+                        <div className="absolute inset-0 bg-black opacity-30" />
                         {/* Content overlay */}
-                        <div className="relative z-10 bg-[#2B2B2B]/50 backdrop-blur-xl h-full w-full">
+                        <div className="relative z-10 h-full w-full">
                             <div className="max-w-[90rem] mx-auto px-4 w-full h-full flex items-center justify-between text-white">
                                 {/* Left Song Info */}
-                                <LeftSideInfo/>
+                                <LeftSideInfo />
 
                                 {/* Controls */}
-                               <PlaybackControls/>
+                                <PlaybackControls />
                             </div>
                         </div>
                     </footer>

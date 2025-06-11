@@ -157,23 +157,24 @@ export default function PlaylistPage() {
     setShowDropdown(!showDropdown)
   }
 
-  const img = 'https://m.media-amazon.com/images/I/51XroYDVK5L._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg'
+  const img = 'https://m.media-amazon.com/images/I/61jOX57qA+L._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg'
   const { dominantColor } = useImageColor(img)
   console.log("d", dominantColor);
 
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       {/* Gradient header with fixed height (300px) */}
       <div
-        style={{ 
-  height: '500px', 
-  background: `linear-gradient(to bottom, ${dominantColor}, #121212, #121212)`
-}}
+        style={{
+          // height: '600px',
+          background: `linear-gradient(to bottom, ${dominantColor}, #121212, #121212)`,
+        }}
+
+        className={`h-[950px] md:h-[1050px] ${panelSize > 33 ? "lg:h-[1050px]":"lg:h-[600px]"} `}
       >
-        <div className={`max-w-[90rem] mx-auto text-white p-6`}>
-          {/* Black gradient overlay */}
-          <div className={`z-50 flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"} gap-8`}>
+        <div className={`max-w-[90rem] mx-auto text-white p-4 md:p-6`}>
+          <div className={`z-0 flex flex-col items-center ${panelSize > 33 ? "lg:flex-col lg:items-center" : "lg:flex-row lg:items-start"} gap-8`}>
             <div className="w-52 h-52 md:w-60 md:h-60 rounded-none shadow-xl object-cover">
               <img
                 src={img}
@@ -284,9 +285,15 @@ export default function PlaylistPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="text-white mt-10">
+
+          </div>
+        </div>
+      </div>
+
+      <div className={`-mt-[485px] md:-mt-[550px] ${panelSize > 33 ? "lg:-mt-[550px]": "lg:-mt-[330px]"} `}>
+        <div className='p-4 md:p-6 max-w-[90rem] mx-auto'>
+          <div className="text-white ">
             <div className="divide-y divide-[#2a2b2c]">
               {tracks.map((track) => (
                 <div
@@ -364,9 +371,6 @@ export default function PlaylistPage() {
             </div>
           </div>
         </div>
-        {/* Background with gradient and blurred */}
-
-
       </div>
     </div>
   );
