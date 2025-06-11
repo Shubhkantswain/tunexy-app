@@ -21,7 +21,7 @@ const AccountDrowDown = () => {
             {dropdownItems.map((item, index) => (
                 <div
                     key={index}
-                    className="px-4 py-3 text-xs text-white hover:bg-white/10 cursor-pointer border-b border-white/10 last:border-none"
+                    className="px-4 py-3 text-sm text-white hover:bg-white/10 cursor-pointer border-b border-white/10 last:border-none"
                 >
                     {item}
                 </div>
