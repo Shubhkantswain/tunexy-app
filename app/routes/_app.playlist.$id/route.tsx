@@ -263,7 +263,7 @@ export default function PlaylistPage() {
                       <p className="text-white text-sm truncate">{"23 may 2025"}</p>
                     </div>
 
-                    <span
+                    <span   
                       className={`hidden lg:hidden px-2 ${panelSize > 12 ? "md:hidden" : "md:block"
                         } text-white text-sm font-medium min-w-0`}
                     >

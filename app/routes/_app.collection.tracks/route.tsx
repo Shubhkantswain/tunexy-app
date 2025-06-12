@@ -208,33 +208,133 @@ export default function PlaylistPage() {
             </div>
 
             <div className={`-mt-[485px] md:-mt-[550px] ${panelSize > 33 ? "lg:-mt-[550px]" : "lg:-mt-[330px]"}`}>
-  <div className='p-4 md:p-6 max-w-[90rem] mx-auto'>
-    <div className="text-white space-y-2">
-      {tracks.map((track, index) => (
-        <div key={track.id} className="flex items-center justify-between px-4 py-3 hover:bg-[#29292A] rounded-md transition-colors group cursor-pointer">
-          {/* Left section */}
-          <div className="flex items-center gap-4 w-[40%] min-w-0">
-            <span className="w-4 text-sm text-gray-400">{index + 1}</span>
-            <img src={track.image} alt={track.title} className="w-12 h-12 rounded-md object-cover" />
-            <div className="min-w-0">
-              <p className="truncate font-semibold text-sm">{track.title}</p>
-              <p className="truncate text-xs text-gray-400">{track.artists}</p>
+                <div className='p-4 md:p-6 max-w-[90rem] mx-auto'>
+
+                    <div className="text-white space-y-2">
+                        <div
+                            className=" border-b border-[#2B2C2C] flex items-center justify-between p-4 hover:bg-[#2B2C2C] transition-colors group cursor-pointer"
+                        >
+                            {/* Left side - Track number, image, and info */}
+                            <div className="flex items-center space-x-4 flex-1 min-w-0">
+                                <div className="w-4 text-gray-400 text-sm font-medium -mr-2">
+                                    {"#"}
+                                </div>
+
+
+
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center space-x-2">
+                                        <h3 className="text-sm font-medium truncate">{"Title"}</h3>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {/* Right side - Duration, heart, more options */}
+                            <div className="flex items-center gap-24 flex-shrink-0 min-w-fit">
+                                {/* Middle - Album name */}
+                                <div className={`hidden ${panelSize >= 23 ? "lg:hidden" : " lg:block"}  flex-1 px-[115px]`}>
+                                    <p className="text-white text-sm truncate">{"Album"}</p>
+                                </div>
+
+                                <span
+                                    className={`hidden lg:hidden px-2 ${panelSize > 12 ? "md:hidden" : "md:block"
+                                        } text-white text-sm font-medium min-w-0`}
+                                >
+                                    {"Date Added"}
+                                </span>
+
+                                <span
+                                    className={`hidden px-2 ${panelSize > 30 ? "lg:hidden" : "lg:block"
+                                        } text-white text-sm font-medium min-w-0`}
+                                >
+                                    {"Date Added"}
+                                </span>
+
+                                <div className="flex gap-7 flex-shrink-0 px-7">
+                                    <button className=''>
+                                        {/* <Heart className="w-5 h-5 text-gray-400 hover:text-white" /> */}
+                                        <HeartIcon width="20" height="20" />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {tracks.map((track) => (
+                            <div
+                                key={track.id}
+                                className="flex items-center justify-between p-4 hover:bg-[#2B2C2C] transition-colors group cursor-pointer"
+                            >
+                                {/* Left side - Track number, image, and info */}
+                                <div className="flex items-center space-x-4 flex-1 min-w-0">
+                                    <div className="w-4 text-gray-400 text-sm font-medium -mr-2">
+                                        {track.id}
+                                    </div>
+
+                                    {/* Image with Play button on hover */}
+                                    <div className="relative group">
+                                        <img
+                                            src={'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face'}
+                                            alt={`${track.title} artwork`}
+                                            className="w-12 h-12 rounded object-cover"
+                                        />
+
+                                        {/* Play button shown on hover */}
+                                        <button
+                                            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                                        >
+                                            <PlayIcon width="20" height="20" />
+                                        </button>
+                                    </div>
+
+                                    <div className="flex-1 min-w-0">
+                                        <div className="flex items-center space-x-2">
+                                            <h3 className="text-sm font-medium truncate">{track.title}</h3>
+                                        </div>
+                                        <div className="flex items-center space-x-2 mt-1">
+                                            <p className="text-xs text-gray-400 mt-1 truncate">
+                                                {track.artist}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Right side - Duration, heart, more options */}
+                                <div className="flex items-center gap-24 flex-shrink-0 min-w-fit">
+                                    {/* Middle - Album name */}
+                                    <div className={`hidden ${panelSize >= 23 ? "lg:hidden" : " lg:block"}  flex-1 px-2`}>
+                                        <p className="text-white text-sm truncate">{"Sonu Ke Titu Ki Sweety"}</p>
+                                    </div>
+
+                                    <span
+                                        className={`hidden lg:hidden px-2 ${panelSize > 12 ? "md:hidden" : "md:block"
+                                            } text-white text-sm font-medium min-w-0`}
+                                    >
+                                        {"23 may 2025"}
+                                    </span>
+
+                                    <span
+                                        className={`hidden px-2 ${panelSize > 30 ? "lg:hidden" : "lg:block"
+                                            } text-white text-sm font-medium min-w-0`}
+                                    >
+                                        {"23 may 2025"}
+                                    </span>
+
+                                    <div className="flex gap-7 flex-shrink-0 px-2">
+
+                                        <span
+                                            className={`px-2 ${panelSize > 30 ? "" : ""
+                                                } text-white text-sm font-medium min-w-0`}
+                                        >
+                                            {track.duration}
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
-          </div>
-
-          {/* Middle section */}
-          <div className="hidden md:block w-[25%] truncate text-sm text-gray-300">{track.album}</div>
-
-          {/* Date */}
-          <div className="hidden lg:block text-xs text-gray-400 w-[15%]">{track.date}</div>
-
-          {/* Duration */}
-          <div className="text-xs text-gray-400 w-[5%] text-right">{track.duration}</div>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
 
 
         </div>
