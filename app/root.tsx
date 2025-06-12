@@ -24,19 +24,29 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body className="bg-black">
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+   <html lang="en">
+  <head>
+    <meta charSet="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inconsolata:wght@200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <Meta />
+    <Links />
+  </head>
+  <body className="bg-black inconsolata">
+    {children}
+    <ScrollRestoration />
+    <Scripts />
+  </body>
+</html>
+
+
   );
 }
 

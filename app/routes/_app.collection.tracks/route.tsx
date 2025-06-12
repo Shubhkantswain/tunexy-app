@@ -64,8 +64,8 @@ export default function PlaylistPage() {
         setShowDropdown(!showDropdown)
     }
 
-    const img = 'https://m.media-amazon.com/images/I/61pId5QmuDL._UX250_FMwebp_QL85_.jpg'
-    const { dominantColor } = useImageColor(img)
+    const img = 'https://us.123rf.com/450wm/littlecuckoo/littlecuckoo1506/littlecuckoo150604243/41290467-coraz%C3%B3n-icono-de-la-muestra-valent%C3%ADn-icono.jpg?ver=6'
+    const { dominantColor } = useImageColor('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuAVT188-hTjJ1NDN-87fF74Hf2e1MYYlegQ&s')
     console.log("d", dominantColor);
 
 
@@ -212,7 +212,7 @@ export default function PlaylistPage() {
 
                     <div className="text-white space-y-2">
                         <div
-                            className=" border-b border-[#2B2C2C] flex items-center justify-between p-4 hover:bg-[#2B2C2C] transition-colors group cursor-pointer"
+                            className=" border-b border-[#2B2C2C] flex items-center justify-between p-4 transition-colors group"
                         >
                             {/* Left side - Track number, image, and info */}
                             <div className="flex items-center space-x-4 flex-1 min-w-0">

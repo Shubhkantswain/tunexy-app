@@ -20,7 +20,7 @@ function MobileLayout() {
             <Header />
 
             {/* Scrollable Content Area */}
-            <main className="pt-[63px] pb-[135px] h-full bg-[#121212]">
+            <main className="pt-[62px] pb-[135px] h-full bg-[#121212]">
                 <Outlet />
             </main>
 

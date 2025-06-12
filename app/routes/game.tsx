@@ -1,45 +1,69 @@
-import React from "react";
+import { useNavigate } from '@remix-run/react';
+import React from 'react';
 
 const games = [
-  { title: "Fortnite", img: "/games/fortnite.jpg", price: "Free" },
-  { title: "Rocket League", img: "/games/rocketleague.jpg", price: "Free" },
-  { title: "Genshin Impact", img: "/games/genshin.jpg", price: "Free" },
-  { title: "Zenless Zone Zero", img: "/games/zenless.jpg", price: "Free" },
-  { title: "Wuthering Waves", img: "/games/wuthering.jpg", price: "Free" },
-  { title: "Honkai: Star Rail", img: "/games/honkai.jpg", price: "Free" },
-  { title: "VALORANT", img: "/games/valorant.jpg", price: "Free" },
-  { title: "Fall Guys", img: "/games/fallguys.jpg", price: "Free" },
-  { title: "Marvel Rivals", img: "/games/marvel.jpg", price: "Free" },
-  { title: "The Sims™ 4", img: "/games/sims4.jpg", price: "Free" },
+  {
+    name: 'Fortnite',
+    price: 'Free',
+    img: 'https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Fortnite_Save_The_World.jpg/220px-Fortnite_Save_The_World.jpg',
+  },
+  {
+    name: 'Rocket League®',
+    price: 'Free',
+    img: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Rocket_League_cover.jpg/220px-Rocket_League_cover.jpg',
+  },
+  {
+    name: 'Splitgate 2',
+    price: 'Free',
+    img: 'https://upload.wikimedia.org/wikipedia/en/6/6a/Splitgate_cover_art.jpg',
+  },
+  {
+    name: 'Fall Guys',
+    price: 'Free',
+    img: 'https://upload.wikimedia.org/wikipedia/en/2/2b/Fall_Guys_cover.jpg',
+  },
 ];
 
-const GameGrid = () => {
+const GameList = () => {
+  const navigate = useNavigate()
+
   return (
-    <div className="min-h-screen bg-black text-white flex justify-center">
-      <div className="w-full max-w-7xl px-4 py-10">
-        <h2 className="text-2xl font-semibold mb-6">Free to Play</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 place-items-center">
-          {games.map((game, index) => (
-            <div
-              key={index}
-              className="bg-[#1f1f1f] rounded-md overflow-hidden w-full max-w-[200px] hover:scale-105 transition-transform"
-            >
-              <img
-                src={game.img}
-                alt={game.title}
-                className="w-full h-[260px] object-cover"
-              />
-              <div className="p-3">
-                <p className="text-sm text-gray-300">Base Game</p>
-                <h3 className="text-md font-semibold">{game.title}</h3>
-                <p className="text-sm text-gray-400">{game.price}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden p-4">
+      {/* Fireflies */}
+      <div className="absolute inset-0 z-0">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <span key={i} className="firefly" />
+        ))}
       </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-sm space-y-4 bg-black/30  rounded-xl p-6 border border-white/10">
+        <div className="flex justify-between items-center px-2">
+          <h2 className="text-lg font-semibold">Most Popular Free-to-Play</h2>
+          <span className="text-sm text-gray-400 hover:underline cursor-pointer">{'>'}</span>
+        </div>
+
+        {games.map((game, idx) => (
+          <div
+            key={idx}
+            className="flex items-center space-x-4 p-2 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+            onClick={() => navigate("/games/memory")}
+          >
+            <img
+              src={'https://img.freepik.com/fotos-premium/corazones-rojos-sobre-fondo-plastico-azul-dia-san-valentin_33827-36.jpg'}
+              alt={game.name}
+              className="w-12 h-16 rounded object-cover"
+            />
+            <div>
+              <h3 className="text-base font-medium">{game.name}</h3>
+              <p className="text-sm text-gray-400">{game.price}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 };
 
-export default GameGrid;
+export default GameList;

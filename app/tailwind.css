@@ -118,3 +118,70 @@ body {
     height: 13rem; /* or h-24 */
   }
 }
+
+
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 9999px;
+  box-shadow: 0 0 6px 2px white;
+  opacity: 0.8;
+  animation: fly 8s infinite ease-in-out;
+}
+
+/* Add random position using nth-child */
+.firefly:nth-child(1)  { top: 10%; left: 20%; }
+.firefly:nth-child(2)  { top: 30%; left: 80%; }
+.firefly:nth-child(3)  { top: 60%; left: 40%; }
+.firefly:nth-child(4)  { top: 20%; left: 65%; }
+.firefly:nth-child(5)  { top: 75%; left: 10%; }
+.firefly:nth-child(6)  { top: 50%; left: 90%; }
+.firefly:nth-child(7)  { top: 85%; left: 30%; }
+.firefly:nth-child(8)  { top: 40%; left: 50%; }
+.firefly:nth-child(9)  { top: 25%; left: 35%; }
+.firefly:nth-child(10) { top: 15%; left: 70%; }
+.firefly:nth-child(11) { top: 60%; left: 15%; }
+.firefly:nth-child(12) { top: 45%; left: 80%; }
+.firefly:nth-child(13) { top: 90%; left: 50%; }
+.firefly:nth-child(14) { top: 35%; left: 90%; }
+.firefly:nth-child(15) { top: 55%; left: 60%; }
+.firefly:nth-child(16) { top: 65%; left: 40%; }
+.firefly:nth-child(17) { top: 80%; left: 75%; }
+.firefly:nth-child(18) { top: 5%;  left: 45%; }
+.firefly:nth-child(19) { top: 33%; left: 25%; }
+.firefly:nth-child(20) { top: 70%; left: 55%; }
+
+@keyframes fly {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.3; }
+  25%  { transform: translate(-10px, 15px) scale(1.2); opacity: 0.7; }
+  50%  { transform: translate(15px, -10px) scale(1.1); opacity: 1; }
+  75%  { transform: translate(-20px, 20px) scale(1.3); opacity: 0.6; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+}
+
+.firefly:nth-child(odd) {
+  animation-duration: 10s;
+}
+
+.firefly:nth-child(even) {
+  animation-duration: 12s;
+}
+
+.firefly:nth-child(3n) {
+  background-color: #00e0ff;
+  box-shadow: 0 0 8px 3px #00e0ff;
+}
+
+.firefly:nth-child(4n) {
+  background-color: #ff00ff;
+  box-shadow: 0 0 8px 3px #ff00ff;
+}
+
+
+.inconsolata {
+font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+
+}

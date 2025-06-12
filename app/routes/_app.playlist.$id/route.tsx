@@ -66,7 +66,7 @@ export default function PlaylistPage() {
     setShowDropdown(!showDropdown)
   }
 
-  const img = 'https://m.media-amazon.com/images/I/61pId5QmuDL._UX250_FMwebp_QL85_.jpg'
+  const img = 'https://i.scdn.co/image/ab67616d0000b273143628f8f8a2ca5d59dfebf2'
   const { dominantColor } = useImageColor(img)
   console.log("d", dominantColor);
 
