@@ -1,0 +1,53 @@
+import { LibrarayIcon, PlusIcon } from '~/Svgs';
+
+interface HeaderProps {
+    panelSize: number;
+    setPanelSize: React.Dispatch<React.SetStateAction<number>>;
+    isScrolled: boolean
+}
+
+const Header: React.FC<HeaderProps> = ({ panelSize, setPanelSize, isScrolled }) => {
+    return (
+        <>
+            {
+                panelSize > 13 ? (
+                    <div className='px-4 pt-4'>
+                        <div className="flex items-center justify-between">
+                            <h2
+                                className="text-md font-bold text-gray-200 flex items-center group gap-2 cursor-pointer hover:text-gray-400"
+                                onClick={() => setPanelSize(window.innerWidth >= 1024 ? 7 : 10)}
+                                title="Click to collapse library panel"
+                            >
+                                My Library
+                            </h2>
+
+                            <div className="flex items-center gap-2">
+                                <button className={`${panelSize < 29 ? "md:p-2" : "md:gap-1 px-4 py-2"} lg:gap-1 lg:px-4 lg:py-2 flex items-center hover:bg-[#282828] bg-[#1f1f1f] rounded-full transition-colors`}>
+
+                                        <PlusIcon width="15" height="15" />
+                                    <span className={`${panelSize < 29 ? "md:hidden" : "md:block"} lg:block text-xs text-white font-semibold`}>Create</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <>
+                        <div className={`${isScrolled ? "shadow-[0_4px_5px_rgba(0,0,0,0.6)]" : ""} grid place-items-center w-full py-4 space-y-4`}>
+                            <button className=" text-white rounded-full transition-colors"
+                                onClick={() => setPanelSize(25)}
+                            >
+                                <LibrarayIcon width="27" height="27" />
+                            </button>
+                            <button className="hover:bg-[#282828] bg-[#1f1f1f] text-white p-2 rounded-full transition-colors">
+                                <PlusIcon width="15" height="15" />
+                            </button>
+                        </div>
+                    </>
+
+                )
+            }
+        </>
+    )
+}
+
+export default Header
