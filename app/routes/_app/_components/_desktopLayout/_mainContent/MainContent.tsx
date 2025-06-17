@@ -1,8 +1,15 @@
 import { Outlet } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react'
 import LeftSidebar from './_leftSidebar/LeftSidebar';
+import ExpandedNowPlaying from './_expandedNowPlaying/ExpandedNowPlaying';
+import useDominantColor from '~/hooks/useDominantColor';
 
-const MainContent = () => {
+interface MainContentProps {
+    isScreenExpanded: boolean;
+    onScreenMinimize: () => void
+}
+
+const MainContent: React.FC<MainContentProps> = ({ isScreenExpanded, onScreenMinimize }) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [panelSize, setPanelSize] = useState(25); // Sidebar width in %
     const [breakpoint, setBreakpoint] = useState<'sm' | 'md' | 'lg' | 'xl' | '2xl'>('sm');
@@ -111,6 +118,8 @@ const MainContent = () => {
     console.log("pnell", panelSize);
 
 
+    const { dominantColor } = useDominantColor("https://m.media-amazon.com/images/I/410ywXj9+AL._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg")
+
 
     return (
         <div className="flex flex-1 pt-[61px] pb-[82px] overflow-hidden px-[7px] gap-[3px]"
@@ -135,13 +144,20 @@ const MainContent = () => {
             {/* Right Content Area */}
             <main
                 className="flex-1 relative overflow-y-auto custom-scrollbar bg-[#121212] rounded-lg"
-            // ref={mainContentRef}
             >
                 {/* Gradient Overlay */}
                 {/* <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-green-600 via-[#121212] to-[#121212] pointer-events-none z-0" /> */}
 
-               
-                    <div className="p-0"><Outlet /></div>
+                {
+                    isScreenExpanded ? (
+
+                        <ExpandedNowPlaying onScreenMinimize={onScreenMinimize} dominantColor={dominantColor || ""} />
+
+                    ) : (
+                        <div className="p-0"><Outlet /></div>
+
+                    )
+                }
             </main>
         </div>
     )

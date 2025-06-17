@@ -11,6 +11,13 @@ body {
   }
 }
 
+@media (max-height: 500px) {
+  .custom-img {
+    width: 13rem; /* or w-24 */
+    height: 13rem; /* or h-24 */
+  }
+}
+
 .firefly {
   position: absolute;
   width: 4px;

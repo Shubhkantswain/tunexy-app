@@ -12,6 +12,8 @@ function useDominantColor(imageUrl: string | null): UseDominantColorResult {
     const [error, setError] = useState<string | null>(null);
 
     const getDominantColor = useCallback(async (url: string): Promise<string> => {
+        console.log("yes");
+        
         // Create canvas and image elements
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
