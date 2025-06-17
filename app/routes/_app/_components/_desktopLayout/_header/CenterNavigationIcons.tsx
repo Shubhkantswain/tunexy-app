@@ -1,25 +1,20 @@
-import { Link, useLocation, useNavigate } from '@remix-run/react';
-import React from 'react'
-import { AccountIcon, CloseIcon, ExploreFilledIcon, ExploreIcon, HomeFilledIcon, HomeIcon, LibrarayFilledIcon, LibrarayIcon, MicIcon, SearchFilledIcon, SearchIcon } from '~/Svgs'
+import { Link, useLocation } from '@remix-run/react';
 import SearchBar from './SearchBar';
+import { navigationItems } from '~/constants';
 
 
 const CenterNavigationIcons = () => {
-    const navigationItems = [
-        { path: "/", name: "Home", Icon: HomeIcon, ActiveIcon: HomeFilledIcon, visible: true },
-        { path: "/explore", name: "Explore", Icon: ExploreIcon, ActiveIcon: ExploreFilledIcon, visible: true },
-        { path: "/my/library", name: "Library", Icon: LibrarayIcon, ActiveIcon: LibrarayFilledIcon, visible: true },
-        { path: "/search", name: "Search", Icon: SearchIcon, ActiveIcon: SearchFilledIcon, visible: false },
-    ];
-
     const { pathname } = useLocation()
-    const navigate = useNavigate()
 
     return (
         <div className="flex flex-1 basis-0 items-center justify-center gap-6">
-            {navigationItems.map(({ path, name, Icon, ActiveIcon, visible }) => {
-                const isActive = pathname == path;
-                if (!visible) return null;
+            {navigationItems.map(({ path, name, Icon, ActiveIcon, displayOn }) => {
+                const layoutContext = "desktopHeader"; // or "desktopHeader"
+                const isActive = pathname === path;
+
+                // If this item shouldn't show in the current layout, return null
+                if (!displayOn.includes(layoutContext)) return null;
+
                 return (
                     <Link
                         key={path}
@@ -30,15 +25,21 @@ const CenterNavigationIcons = () => {
                                 e.stopPropagation();
                             }
                         }}
-                        className={`${isActive ? "" : "hover:bg-[#292929]"} p-2 rounded-full bg-[#1f1f1f] transition`}
+                        className={`${isActive ? "" : "hover:bg-[#292929]"
+                            } p-2 rounded-full bg-[#1f1f1f] transition`}
                     >
-                        {isActive ? <ActiveIcon width="20" height="20" /> : <Icon width="20" height="20" />}
+                        {isActive ? (
+                            <ActiveIcon width="20" height="20" />
+                        ) : (
+                            <Icon width="20" height="20" />
+                        )}
                     </Link>
                 );
             })}
 
+
             {/* Search Bar */}
-            <SearchBar/>
+            <SearchBar />
         </div>
     )
 }

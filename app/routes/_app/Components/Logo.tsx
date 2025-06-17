@@ -1,4 +1,3 @@
-import React from 'react'
 import { LogoIcon } from '~/Svgs'
 
 const Logo = () => {
@@ -8,7 +7,7 @@ const Logo = () => {
                 <LogoIcon width="40" height="40" />
             </button>
         </div>
-    )
+    ) 
 }
 
 export default Logo

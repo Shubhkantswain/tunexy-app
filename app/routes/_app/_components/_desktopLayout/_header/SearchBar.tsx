@@ -1,14 +1,13 @@
 import { useLocation, useNavigate } from '@remix-run/react';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ListeningInterface from '~/routes/_app/Components/ListeningInterface';
-// import ListeningInterface from '~/routes/_app/components/ListeningInterface';
 import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
 
 const SearchBar = () => {
   const { pathname } = useLocation();
   const isSearchPage = pathname === '/search';
   const navigate = useNavigate();
-
+ 
   const [searchTerm, setSearchTerm] = useState('');
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
