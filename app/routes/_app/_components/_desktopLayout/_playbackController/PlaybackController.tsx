@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { Volume2 } from 'lucide-react'
-import { NextIcon, PlayIcon, PrevIcon, SkipBackwardIcon, SkipForwardIcon, VolumeIcon } from '~/Svgs'
-import { Slider } from '~/components/ui/slider'
 import ProgressSlider from './ProgressSlider'
 import TrackInfo from './TrackInfo'
 import CenterControls from './CenterControls'

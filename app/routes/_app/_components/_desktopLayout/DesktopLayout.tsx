@@ -18,8 +18,12 @@ const DesktopLayout = () => {
 
       {/* Footer - Music Player */}
       <PlaybackController isScreenExpanded={isScreenExpanded} onScreenExpand={screenExpand} onScreenMinimize={screenMinimize} />
+
     </div>
   );
 };
 
 export default DesktopLayout;
+
+
+

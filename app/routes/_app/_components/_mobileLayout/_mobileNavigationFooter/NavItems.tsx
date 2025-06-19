@@ -1,12 +1,12 @@
 import { Link, useLocation } from '@remix-run/react';
-import { navigationItems } from '~/constants';
+import { NAVIGATION_ITEMS } from '~/constants';
 
-const NavItems = () => { 
+const NavItems = () => {
     const { pathname } = useLocation()
 
     return (
         <>
-            {navigationItems.map(({ path, name, Icon, ActiveIcon }) => {
+            {NAVIGATION_ITEMS.map(({ path, name, Icon, ActiveIcon }) => {
                 const isActive = pathname == path; // Replace this with actual route match if needed
 
                 return (

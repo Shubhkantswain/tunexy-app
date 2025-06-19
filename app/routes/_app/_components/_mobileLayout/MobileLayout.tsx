@@ -4,6 +4,7 @@ import ExpandedNowPlaying from './_expandedNowPlaying/ExpandedNowPlaying'
 import MobileNavigationFooter from './_mobileNavigationFooter/MobileNavigationFooter'
 import { Outlet } from '@remix-run/react'
 import { useState } from 'react'
+import Footer from '../../Components/Footer'
 
 function MobileLayout() {
   const [isScreenExpanded, setIsScreenExpanded] = useState(false)
@@ -18,6 +19,7 @@ function MobileLayout() {
       {/* Scrollable Content Area */}
       <main className="pt-[62px] pb-[135px] h-full bg-[#121212]">
         <Outlet />
+        {/* <Footer/> */}
       </main>
 
       {/* Mobile Mini Player */}

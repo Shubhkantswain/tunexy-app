@@ -26,8 +26,6 @@ const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ isScreenExpande
                     }}
                 />
 
-                {/* Dark overlay to reduce brightness */}
-                <div className="absolute inset-0 bg-black opacity-30" />
                 <div
                     className={`hide-scrollbar fixed inset-0  overflow-y-auto z-50`}
                 >

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import useDominantColor from '~/hooks/useDominantColor';
-import { ExitScreenIcon, FullScreenIcon, MinimizeIcon, MoreIcon } from '~/Svgs';
+import TopControls from './TopControls';
+import CenteredImage from './CenteredImage';
 
 interface ExpandedNowPlayingProps {
     onScreenMinimize: () => void;
@@ -26,34 +26,11 @@ const ExpandedNowPlaying: React.FC<ExpandedNowPlayingProps> = ({ onScreenMinimiz
 
     return (
         <div className="bg-gradient-to-b flex flex-col w-full h-full p-6 rounded-md relative overflow-hidden">
-            {/* Top Row */}
-            <div className="flex items-center justify-between z-10">
-                <h2 className="text-white font-semibold text-sm">New Music Friday India</h2>
-                <div className="flex items-center gap-5 text-white text-xl">
-                    <MoreIcon width="20" height="20" />
-                    <button onClick={handleToggleFullscreen}>
-                        {isFullScreen ? (
-                            <ExitScreenIcon width="16" height="16" />
-                        ) : (
-                            <FullScreenIcon width="16" height="16" />
-                        )}
-                    </button>
-                    <button onClick={onScreenMinimize}>
-                        <MinimizeIcon width="16" height="16" />
-                    </button>
-                </div>
-            </div>
+            {/* Top Controls */}
+            <TopControls isFullScreen={isFullScreen} handleToggleFullscreen={handleToggleFullscreen} onScreenMinimize={onScreenMinimize} />
 
-            {/* Centered Card */}
-            <div className="flex flex-1 justify-center items-center z-10">
-                <div className="relative shadow-2xl rounded-xl overflow-hidden">
-                    <img
-                        src="https://m.media-amazon.com/images/I/410ywXj9+AL._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg"
-                        alt="Music Artist"
-                        className="w-64 h-64 object-cover rounded-xl custom-img"
-                    />
-                </div>
-            </div>
+            {/* Centered Img */}
+            <CenteredImage/>
 
             {/* Background color - positioned behind content */}
             <div

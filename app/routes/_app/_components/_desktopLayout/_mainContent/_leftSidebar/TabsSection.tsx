@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { tabs } from "~/constants";
+import { usePanelSizeStore } from "~/store/usePanelSizeStore";
 
 interface TabsSectionProps {
-    panelSize: number;
     isScrolled: boolean;
 }
 
-const TabsSection: React.FC<TabsSectionProps> = ({ panelSize, isScrolled }) => {
-    const tabs = ['Playlists', 'Artists', 'Albums', 'Podcasts'];
+const TabsSection: React.FC<TabsSectionProps> = ({ isScrolled }) => {
+    const { panelSize } = usePanelSizeStore(); // Sidebar width in %
+
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
 
@@ -16,7 +18,7 @@ const TabsSection: React.FC<TabsSectionProps> = ({ panelSize, isScrolled }) => {
         if (tabRefs.current.length > 0) {
             const activeIndex = tabs.indexOf(activeTab);
             const activeElement = tabRefs.current[activeIndex];
-            
+
             if (activeElement) {
                 setUnderlineStyle({
                     width: activeElement.offsetWidth,
@@ -36,18 +38,17 @@ const TabsSection: React.FC<TabsSectionProps> = ({ panelSize, isScrolled }) => {
                                 key={tab}
                                 ref={el => tabRefs.current[index] = el}
                                 onClick={() => setActiveTab(tab)}
-                                className={`rounded-full text-xs font-medium whitespace-nowrap transition-colors pb-2 relative ${
-                                    activeTab === tab
+                                className={`rounded-full text-xs font-medium whitespace-nowrap transition-colors pb-2 relative ${activeTab === tab
                                         ? 'text-[#3babdb]'
                                         : 'text-white hover:text-gray-300'
-                                }`}
+                                    }`}
                             >
                                 {tab}
                             </button>
                         ))}
-                     
+
                         {/* Active tab underline */}
-                        <div 
+                        <div
                             className="absolute bottom-0 h-0.5 bg-[#3babdb] transition-all duration-300"
                             style={{
                                 width: `${underlineStyle.width}px`,

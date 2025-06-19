@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const playlists = [
     {
         id: 1,
@@ -57,7 +59,44 @@ const playlists = [
     },
 ];
 
-const TrackLists = () => {
+const SkeletonPlaylistItem = () => {
+    return (
+        <div className="shrink-0 w-[140px] md:w-[150px] animate-pulse">
+            <div className="rounded overflow-hidden">
+                <div className="w-full h-[140px] md:h-[150px] rounded bg-[#272727] flex items-center justify-center">
+                   
+                </div>
+
+            </div>
+            <div className="mt-2">
+                <div className="h-4 bg-[#272727] rounded mb-2"></div>
+                <div className="h-3 bg-[#272727] rounded w-3/4"></div>
+            </div>
+        </div>
+    );
+};
+
+
+const PlaylistItems = () => {
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (loading) {
+        return (
+            <>
+                {Array.from({ length: 8 }).map((_, i) => (
+                    <SkeletonPlaylistItem key={i} />
+                ))}
+            </>
+        );
+    }
     return (
         <>
             {playlists.map((playlist) => (
@@ -86,4 +125,4 @@ const TrackLists = () => {
     )
 }
 
-export default TrackLists
+export default PlaylistItems

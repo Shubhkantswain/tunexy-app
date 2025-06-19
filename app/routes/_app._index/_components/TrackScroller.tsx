@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ControllerSection from './ControllerSection';
 import { HeartIcon, MoreIcon, PlayIcon } from '~/Svgs';
 
@@ -74,8 +73,8 @@ const songGroups = [
     ],
 ];
 
-export default function PopularEnglishSongs() {
-    const scrollRef = useRef(null);
+const TrackScroller = () => {
+  const scrollRef = useRef(null);
     const [canScroll, setCanScroll] = useState({ left: false, right: false });
 
     const checkScrollability = (): void => {
@@ -170,3 +169,5 @@ export default function PopularEnglishSongs() {
         </section>
     );
 }
+
+export default TrackScroller

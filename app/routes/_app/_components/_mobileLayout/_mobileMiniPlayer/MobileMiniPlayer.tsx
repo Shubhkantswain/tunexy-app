@@ -22,8 +22,6 @@ const MobileMiniPlayer: React.FC<MobileMiniPlayerProps> = ({ onScreenExpand }) =
                         backgroundColor: `${dominantColor}`,
                     }}
                 />
-                <div className="absolute inset-0 bg-black opacity-10" />
-
 
                 {/* Content overlay */}
                 <div className="relative z-10 h-full w-full">

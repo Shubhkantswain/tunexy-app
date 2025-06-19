@@ -1,14 +1,13 @@
 import { Link, useLocation } from '@remix-run/react';
 import SearchBar from './SearchBar';
-import { navigationItems } from '~/constants';
-
+import { NAVIGATION_ITEMS } from '~/constants';
 
 const CenterNavigationIcons = () => {
     const { pathname } = useLocation()
 
     return (
         <div className="flex flex-1 basis-0 items-center justify-center gap-6">
-            {navigationItems.map(({ path, name, Icon, ActiveIcon, displayOn }) => {
+            {NAVIGATION_ITEMS.map(({ path, Icon, ActiveIcon, displayOn }) => {
                 const layoutContext = "desktopHeader"; // or "desktopHeader"
                 const isActive = pathname === path;
 

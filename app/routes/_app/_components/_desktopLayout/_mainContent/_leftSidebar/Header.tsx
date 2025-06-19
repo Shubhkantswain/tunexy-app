@@ -1,12 +1,13 @@
+import { usePanelSizeStore } from '~/store/usePanelSizeStore';
 import { LibrarayIcon, PlusIcon } from '~/Svgs';
 
 interface HeaderProps {
-    panelSize: number;
-    setPanelSize: React.Dispatch<React.SetStateAction<number>>;
     isScrolled: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ panelSize, setPanelSize, isScrolled }) => {
+const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
+    const { panelSize, setPanelSize } = usePanelSizeStore(); // Sidebar width in %
+
     return (
         <>
             {
@@ -24,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ panelSize, setPanelSize, isScrolled }) 
                             <div className="flex items-center gap-2">
                                 <button className={`${panelSize < 29 ? "md:p-2" : "md:gap-1 px-4 py-2"} lg:gap-1 lg:px-4 lg:py-2 flex items-center hover:bg-[#282828] bg-[#1f1f1f] rounded-full transition-colors`}>
 
-                                        <PlusIcon width="15" height="15" />
+                                    <PlusIcon width="15" height="15" />
                                     <span className={`${panelSize < 29 ? "md:hidden" : "md:block"} lg:block text-xs text-white font-semibold`}>Create</span>
                                 </button>
                             </div>

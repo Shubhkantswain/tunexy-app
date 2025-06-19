@@ -1,13 +1,11 @@
-import { useState } from "react";
-import useDominantColor from "~/hooks/useDominantColor";
-import { usePanelSizeStore } from "~/store/usePanelSizeStore";
-import PlaylistInfo from "../_app/Components/PlaylistInfo";
-import PlaylistTracks from "./_components/PlaylistTracks";
-import { ViewType } from "~/types";
+import { useState } from "react"
+import useDominantColor from "~/hooks/useDominantColor"
+import { ViewType } from "~/types"
+import PlaylistInfo from "../_app/Components/PlaylistInfo"
+import CollectionTracks from "./_components/CollectionTracks"
 
-const PlaylistPage = () => {
-    const img = "https://i.scdn.co/image/ab67616d0000b273143628f8f8a2ca5d59dfebf2"
-    const { dominantColor } = useDominantColor(img)
+const route = () => {
+    const { dominantColor } = useDominantColor('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuAVT188-hTjJ1NDN-87fF74Hf2e1MYYlegQ&s')
 
     const [view, setView] = useState<ViewType>("Default List")
 
@@ -30,10 +28,10 @@ const PlaylistPage = () => {
                 <PlaylistInfo view={view} setView={setView} />
 
                 {/* Playlist Tracks */}
-                <PlaylistTracks view={view} />
+                <CollectionTracks view={view} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default PlaylistPage;
+export default route

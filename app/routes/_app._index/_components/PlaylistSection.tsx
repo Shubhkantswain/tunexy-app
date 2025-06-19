@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { LeftArrowIcon, RightArrowIcon } from '~/Svgs';
-import TrackLists from './TrackLists';
+import { useEffect, useRef, useState } from 'react'
 import ControllerSection from './ControllerSection';
+import PlaylistItems from './PlaylistItems';
 
-const TrackSection = () => {
+const PlaylistSection = () => {
     const scrollRef = useRef(null);
     const [canScroll, setCanScroll] = useState({ left: false, right: false });
 
@@ -45,7 +44,7 @@ const TrackSection = () => {
         return () => window.removeEventListener('resize', checkScrollability);
     }, []);
 
- 
+
     return (
         <div className="text-white mb-8 md:mb-12">
             {/* Header */}
@@ -59,7 +58,7 @@ const TrackSection = () => {
                     onScroll={handleScroll}
                     className="px-4 md:px-0 flex gap-4 md:gap-6 overflow-x-auto hide-scrollbar scroll-smooth"
                 >
-                   <TrackLists/>
+                    <PlaylistItems />
                 </div>
             </div>
 
@@ -67,4 +66,4 @@ const TrackSection = () => {
     )
 }
 
-export default TrackSection
+export default PlaylistSection
