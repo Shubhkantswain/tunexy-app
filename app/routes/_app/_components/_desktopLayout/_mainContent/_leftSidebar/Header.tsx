@@ -1,4 +1,4 @@
-import { usePanelSizeStore } from '~/store/usePanelSizeStore';
+import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
 import { LibrarayIcon, PlusIcon } from '~/Svgs';
 
 interface HeaderProps {
@@ -6,7 +6,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
-    const { panelSize, setPanelSize } = usePanelSizeStore(); // Sidebar width in %
+    const { preferences: { panelSize }, setPreferences } = useUIPreferencesStore()
+
 
     return (
         <>
@@ -16,7 +17,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                         <div className="flex items-center justify-between">
                             <h2
                                 className="text-md font-bold text-gray-200 flex items-center group gap-2 cursor-pointer hover:text-gray-400"
-                                onClick={() => setPanelSize(window.innerWidth >= 1024 ? 7 : 10)}
+                                onClick={() => {
+                                    const newSize = window.innerWidth >= 1024 ? 7 : 10;
+                                    setPreferences({ panelSize: newSize })
+                                    localStorage.setItem("panelSize", `${newSize}`)
+                                }}
                                 title="Click to collapse library panel"
                             >
                                 My Library
@@ -35,7 +40,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                     <>
                         <div className={`${isScrolled ? "shadow-[0_4px_5px_rgba(0,0,0,0.6)]" : ""} grid place-items-center w-full py-4 space-y-4`}>
                             <button className=" text-white rounded-full transition-colors"
-                                onClick={() => setPanelSize(25)}
+                                onClick={() => {
+                                    const newSize = 25;
+                                    setPreferences({ panelSize: newSize })
+                                    localStorage.setItem("panelSize", `${newSize}`)
+                                }}
                             >
                                 <LibrarayIcon width="27" height="27" />
                             </button>

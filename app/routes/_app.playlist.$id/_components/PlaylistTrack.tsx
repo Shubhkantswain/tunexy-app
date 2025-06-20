@@ -1,4 +1,4 @@
-import { usePanelSizeStore } from "~/store/usePanelSizeStore";
+import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 import { HeartIcon, MoreIcon, PlayIcon } from "~/Svgs";
 import { ViewType } from "~/types";
 
@@ -18,7 +18,7 @@ interface PlaylistTrackProps {
 }
 
 const PlaylistTrack: React.FC<PlaylistTrackProps> = ({ track, view }) => {
-    const { panelSize } = usePanelSizeStore()
+    const { preferences: { panelSize } } = useUIPreferencesStore()
 
     return (
         <div

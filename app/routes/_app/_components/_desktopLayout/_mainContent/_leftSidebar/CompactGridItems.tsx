@@ -1,4 +1,4 @@
-import { usePanelSizeStore } from '~/store/usePanelSizeStore'
+import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 
 const libraryItems = [
     {
@@ -58,8 +58,8 @@ const libraryItems = [
 ];
 
 const CompactGridItems = () => {
-    const { panelSize } = usePanelSizeStore();
-    
+    const { preferences: { panelSize } } = useUIPreferencesStore()
+
     return (
         <div className={`p-2 grid ${panelSize > 28 ? 'grid-cols-3' :
             panelSize < 17 ? 'grid-cols-1' :

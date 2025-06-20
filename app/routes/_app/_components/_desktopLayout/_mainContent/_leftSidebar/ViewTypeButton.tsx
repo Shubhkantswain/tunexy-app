@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { VIEW_ICONS, VIEW_OPTIONS } from '~/constants'
-import { ViewType } from '~/types';
+import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
 
 interface ViewTypeButtonProps {
-    view: ViewType;
-    setView: React.Dispatch<React.SetStateAction<ViewType>>;
+
 }
 
-const ViewTypeButton: React.FC<ViewTypeButtonProps> = ({ view, setView }) => {
+const ViewTypeButton: React.FC<ViewTypeButtonProps> = ({ }) => {
+    const { preferences: { view }, setPreferences } = useUIPreferencesStore()
+
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,7 +58,7 @@ const ViewTypeButton: React.FC<ViewTypeButtonProps> = ({ view, setView }) => {
                             <button
                                 key={option.label}
                                 onClick={() => {
-                                    setView(option.label)
+                                    setPreferences({ view: option.label })
                                     localStorage.setItem("view", option.label)
                                 }}
                                 className={`w-full px-3 py-3 text-left text-xs hover:bg-[#3E3E3E] transition-all duration-200 flex items-center gap-3 ${view === option.label

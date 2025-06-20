@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLoadingStore } from "~/store/useLoadingStore";
 
 const playlists = [
     {
@@ -78,17 +79,17 @@ const SkeletonPlaylistItem = () => {
 
 
 const PlaylistItems = () => {
-    const [loading, setLoading] = useState(true);
+    const {isLoading, setIsLoading} = useLoadingStore();
 
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setLoading(false);
+            setIsLoading(false);
         }, 2000);
         return () => clearTimeout(timer);
     }, []);
 
-    if (loading) {
+    if (isLoading) {
         return (
             <>
                 {Array.from({ length: 8 }).map((_, i) => (

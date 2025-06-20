@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ShowTrackDialog from '~/routes/_app/Components/ShowTracksDialog';
+import { useLoadingStore } from '~/store/useLoadingStore';
 import { LeftArrowIcon, RightArrowIcon } from '~/Svgs';
 
 interface ControllerSectionsProps {
@@ -10,14 +11,10 @@ interface ControllerSectionsProps {
 
 const ControllerSection: React.FC<ControllerSectionsProps> = ({ scroll, canScrollLeft, canScrollRight }) => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
-        return () => clearTimeout(timer);
-    }, []);
+    const {isLoading, setIsLoading} = useLoadingStore();
+   
+   
+ 
 
     if (isLoading) {
         return (

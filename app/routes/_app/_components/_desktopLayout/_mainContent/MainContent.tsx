@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import LeftSidebar from './_leftSidebar/LeftSidebar';
 import ExpandedNowPlaying from './_expandedNowPlaying/ExpandedNowPlaying';
 import useDominantColor from '~/hooks/useDominantColor';
-import { usePanelSizeStore } from '~/store/usePanelSizeStore';
 import Footer from '~/routes/_app/Components/Footer';
 import { useLoadingStore } from '~/store/useLoadingStore';
+import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
 
 interface MainContentProps {
   isScreenExpanded: boolean;
@@ -14,7 +14,8 @@ interface MainContentProps {
 
 const MainContent: React.FC<MainContentProps> = ({ isScreenExpanded, onScreenMinimize }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { panelSize, setPanelSize } = usePanelSizeStore(); // Sidebar width in %
+  const { preferences: { panelSize }, setPreferences } = useUIPreferencesStore()
+
   const [breakpoint, setBreakpoint] = useState<'sm' | 'md' | 'lg' | 'xl' | '2xl'>('sm');
 
   const [isResizing, setIsResizing] = useState(false);
@@ -38,23 +39,23 @@ const MainContent: React.FC<MainContentProps> = ({ isScreenExpanded, onScreenMin
 
     if (breakpoint == "lg") {
       if (newSize <= 8 && newSize >= 7) {
-        setPanelSize(newSize);
+        setPreferences({ panelSize: newSize });
         localStorage.setItem("panelSize", `${newSize}`)
       }
 
       if (newSize >= 25 && newSize <= 40) {
-        setPanelSize(newSize);
+        setPreferences({ panelSize: newSize });
         localStorage.setItem("panelSize", `${newSize}`)
       }
     }
     if (breakpoint == "md") {
       if (newSize <= 11 && newSize >= 10) {
-        setPanelSize(newSize);
+        setPreferences({ panelSize: newSize });
         localStorage.setItem("panelSize", `${newSize}`)
       }
 
       if (newSize >= 25 && newSize <= 40) {
-        setPanelSize(newSize);
+        setPreferences({ panelSize: newSize });
         localStorage.setItem("panelSize", `${newSize}`)
       }
     }
@@ -115,7 +116,7 @@ const MainContent: React.FC<MainContentProps> = ({ isScreenExpanded, onScreenMin
   useEffect(() => {
     const minSize = breakpoint === "lg" ? 7 : 10;
     if (panelSize < minSize) {
-      setPanelSize(minSize);
+      setPreferences({ panelSize: minSize });
     }
   }, [breakpoint]);
 
@@ -128,8 +129,10 @@ const MainContent: React.FC<MainContentProps> = ({ isScreenExpanded, onScreenMin
   const { dominantColor } = useDominantColor("https://m.media-amazon.com/images/I/410ywXj9+AL._SX354_SY354_BL0_QL100__UX358_FMwebp_QL85_.jpg")
 
   useEffect(() => {
-    const size = localStorage.getItem("panelSize") || 25
-    setPanelSize(Number(size))
+    const view = localStorage.getItem("view") || "Default List"
+    const panelSize = Number(localStorage.getItem("panelSize"))
+
+    setPreferences({ view, panelSize })
   }, [])
 
 

@@ -1,14 +1,12 @@
-import { usePanelSizeStore } from "~/store/usePanelSizeStore";
-import { ViewType } from "~/types";
-import SmallPanelLibraryItems from "./SmallPanelLibraryItems";
 import { VIEW_COMPONENTS } from "~/constants";
+import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 
 interface LibraryItemsProps {
-    view: ViewType
+
 }
 
-const LibraryItems: React.FC<LibraryItemsProps> = ({ view }) => {
-    const { panelSize } = usePanelSizeStore(); // Sidebar width in %
+const LibraryItems: React.FC<LibraryItemsProps> = ({ }) => {
+    const { preferences: { view, panelSize } } = useUIPreferencesStore()
 
     const getViewComponent = () => {
         if (panelSize <= 13) return VIEW_COMPONENTS["Small Panel"];
@@ -17,7 +15,7 @@ const LibraryItems: React.FC<LibraryItemsProps> = ({ view }) => {
 
     const CurrentViewComponent = getViewComponent();
 
-    return ( 
+    return (
         <div className="flex-1 flex flex-col">
             <div className={`space-y-1 px-2.5 flex-grow ${panelSize > 13 ? "pt-2 pb-2" : "pt-0 pb-4"} overflow-auto`}>
                 <CurrentViewComponent />

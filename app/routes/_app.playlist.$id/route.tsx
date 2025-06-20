@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useDominantColor from "~/hooks/useDominantColor";
-import { usePanelSizeStore } from "~/store/usePanelSizeStore";
 import PlaylistInfo from "../_app/Components/PlaylistInfo";
 import PlaylistTracks from "./_components/PlaylistTracks";
 import { ViewType } from "~/types";

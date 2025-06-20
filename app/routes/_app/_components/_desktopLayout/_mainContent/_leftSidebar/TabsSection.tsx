@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { tabs } from "~/constants";
-import { usePanelSizeStore } from "~/store/usePanelSizeStore";
+import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 
 interface TabsSectionProps {
     isScrolled: boolean;
 }
 
 const TabsSection: React.FC<TabsSectionProps> = ({ isScrolled }) => {
-    const { panelSize } = usePanelSizeStore(); // Sidebar width in %
+    const { preferences: { panelSize } } = useUIPreferencesStore()
 
     const [activeTab, setActiveTab] = useState(tabs[0]);
     const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
@@ -39,8 +39,8 @@ const TabsSection: React.FC<TabsSectionProps> = ({ isScrolled }) => {
                                 ref={el => tabRefs.current[index] = el}
                                 onClick={() => setActiveTab(tab)}
                                 className={`rounded-full text-xs font-medium whitespace-nowrap transition-colors pb-2 relative ${activeTab === tab
-                                        ? 'text-[#3babdb]'
-                                        : 'text-white hover:text-gray-300'
+                                    ? 'text-[#3babdb]'
+                                    : 'text-white hover:text-gray-300'
                                     }`}
                             >
                                 {tab}

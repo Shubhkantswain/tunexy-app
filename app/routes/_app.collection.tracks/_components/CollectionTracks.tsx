@@ -1,8 +1,7 @@
 import React from 'react'
-import { usePanelSizeStore } from '~/store/usePanelSizeStore'
-import { HeartIcon, MoreIcon, PlayIcon } from '~/Svgs';
 import { ViewType } from '~/types';
 import CollectionTrack from './CollectionTrack';
+import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
 // import PlaylistTrack from './PlaylistTrack';
 
 interface Track {
@@ -78,7 +77,7 @@ interface CollectionTracksProps {
 }
 
 const CollectionTracks: React.FC<CollectionTracksProps> = ({ view }) => {
-    const { panelSize } = usePanelSizeStore()
+    const { preferences: { panelSize } } = useUIPreferencesStore()
 
     return (
         <div className=''>

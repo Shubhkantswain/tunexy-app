@@ -1,4 +1,4 @@
-import { usePanelSizeStore } from '~/store/usePanelSizeStore'
+import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
 
 const libraryItems = [
     {
@@ -58,7 +58,7 @@ const libraryItems = [
 ];
 
 const DefaultGridItems = () => {
-    const { panelSize } = usePanelSizeStore();
+    const { preferences: { panelSize } } = useUIPreferencesStore()
 
     return (
         <>

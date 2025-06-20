@@ -6,21 +6,15 @@ import SearchTogglePanel from "./SearchTogglePanel";
 import LibraryItems from "./LibraryItems";
 import { ViewType } from "~/types";
 import { useLoadingStore } from "~/store/useLoadingStore";
+import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 
 const LeftSidebar = () => {
-    const [view, setView] = useState<ViewType>("Default List")
+    // const [view, setView] = useState<ViewType>("Default List")
+    
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const [isScrolled, setIsScrolled] = useState(false);
     const { isLoading, setIsLoading } = useLoadingStore()
-
-    useEffect(() => {
-        const view = localStorage.getItem("view") || "Default List"
-        if (view) setView(view)
-        setTimeout(() => {
-            setIsLoading(false)
-        },2000)
-    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
@@ -41,26 +35,20 @@ const LeftSidebar = () => {
 
     return (
         <>
-            {
-                !isLoading && (
-                    <>
-                        <Header isScrolled={isScrolled} />
+            <Header isScrolled={isScrolled} />
 
-                        <TabsSection isScrolled={isScrolled} />
+            <TabsSection isScrolled={isScrolled} />
 
-                        <div className='overflow-y-auto hide-scrollbar h-screen'
-                            ref={scrollRef}
-                        >
-                            {/* Search & View Options */}
-                            <SearchTogglePanel view={view} setView={setView} />
+            <div className='overflow-y-auto hide-scrollbar h-screen'
+                ref={scrollRef}
+            >
+                {/* Search & View Options */}
+                <SearchTogglePanel  />
 
-                            {/* Library Items */}
-                            <LibraryItems view={view} />
+                {/* Library Items */}
+                <LibraryItems />
 
-                        </div>
-                    </>
-                )
-            }
+            </div>
         </>
     )
 }
