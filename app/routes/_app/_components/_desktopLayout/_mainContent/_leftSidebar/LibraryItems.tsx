@@ -1,4 +1,6 @@
-import { VIEW_COMPONENTS } from "~/constants";
+import { useEffect, useState } from "react";
+import { SmallPanelLibraryItemsSkeleton } from "~/components/Skeletons";
+import { VIEW_COMPONENTS, VIEW_COMPONENTS_SKELETONS } from "~/constants";
 import { useUIPreferencesStore } from "~/store/useUIPreferencesStore";
 
 interface LibraryItemsProps {
@@ -6,6 +8,7 @@ interface LibraryItemsProps {
 }
 
 const LibraryItems: React.FC<LibraryItemsProps> = ({ }) => {
+    const [isLoading, setIsLoading] = useState(true)
     const { preferences: { view, panelSize } } = useUIPreferencesStore()
 
     const getViewComponent = () => {
@@ -14,6 +17,24 @@ const LibraryItems: React.FC<LibraryItemsProps> = ({ }) => {
     };
 
     const CurrentViewComponent = getViewComponent();
+
+    const getViewComponentSkeleton = () => {
+        if (panelSize <= 13) return VIEW_COMPONENTS_SKELETONS["Small Panel"];
+        return VIEW_COMPONENTS_SKELETONS[view] || VIEW_COMPONENTS_SKELETONS["Default List"];
+    };
+
+    const CurrentViewComponentSkeleton = getViewComponentSkeleton();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 4000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (isLoading) {
+        return <CurrentViewComponentSkeleton />
+    }
 
     return (
         <div className="flex-1 flex flex-col">

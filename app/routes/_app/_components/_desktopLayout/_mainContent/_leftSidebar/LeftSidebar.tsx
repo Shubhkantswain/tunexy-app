@@ -14,7 +14,6 @@ const LeftSidebar = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const [isScrolled, setIsScrolled] = useState(false);
-    const { isLoading, setIsLoading } = useLoadingStore()
 
     useEffect(() => {
         const handleScroll = () => {
@@ -33,7 +32,7 @@ const LeftSidebar = () => {
         };
     }, []);
 
-    return (
+    return (   
         <>
             <Header isScrolled={isScrolled} />
 

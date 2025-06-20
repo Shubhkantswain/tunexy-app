@@ -11,7 +11,7 @@ const libraryItems = [
     {
         id: 1,
         type: 'playlist',
-        title: 'Liked Songs',
+        title: 'Liked Songs Liked SongsLiked Songs Liked Songs',
         subtitle: 'Playlist • 73 songs',
         img: "https://m.media-amazon.com/images/I/41wN7b5qZiL._UX250_FMwebp_QL85_.jpg"
 

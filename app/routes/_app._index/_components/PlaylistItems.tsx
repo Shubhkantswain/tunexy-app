@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PlaylistItemsSkeleton } from "~/components/Skeletons";
 import { useLoadingStore } from "~/store/useLoadingStore";
 
 const playlists = [
@@ -60,27 +61,8 @@ const playlists = [
     },
 ];
 
-const SkeletonPlaylistItem = () => {
-    return (
-        <div className="shrink-0 w-[140px] md:w-[150px] animate-pulse">
-            <div className="rounded overflow-hidden">
-                <div className="w-full h-[140px] md:h-[150px] rounded bg-[#272727] flex items-center justify-center">
-                   
-                </div>
-
-            </div>
-            <div className="mt-2">
-                <div className="h-4 bg-[#272727] rounded mb-2"></div>
-                <div className="h-3 bg-[#272727] rounded w-3/4"></div>
-            </div>
-        </div>
-    );
-};
-
-
 const PlaylistItems = () => {
-    const {isLoading, setIsLoading} = useLoadingStore();
-
+    const [ isLoading, setIsLoading ] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -90,14 +72,9 @@ const PlaylistItems = () => {
     }, []);
 
     if (isLoading) {
-        return (
-            <>
-                {Array.from({ length: 8 }).map((_, i) => (
-                    <SkeletonPlaylistItem key={i} />
-                ))}
-            </>
-        );
+        return <PlaylistItemsSkeleton/>
     }
+
     return (
         <>
             {playlists.map((playlist) => (

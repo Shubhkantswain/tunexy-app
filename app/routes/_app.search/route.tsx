@@ -1,11 +1,10 @@
 import { useLocation, useNavigate } from '@remix-run/react';
 import React, { useEffect, useRef, useState } from 'react'
-import { CloseIcon, MicIcon, SearchIcon } from '~/Svgs';
+import { CloseIcon, LogoIcon, MicIcon, SearchIcon } from '~/Svgs';
 import ListeningInterface from '../_app/Components/ListeningInterface';
+import { useLoadingStore } from '~/store/useLoadingStore';
 
 const route = () => {
-  const { pathname } = useLocation();
-
   const [searchTerm, setSearchTerm] = useState('');
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -59,6 +58,24 @@ const route = () => {
     recognitionRef.current.stop();
   };
 
+  const { isLoading, setIsLoading } = useLoadingStore();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds delay
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white gap-4">
+        <LogoIcon width="80" height="80" />
+        <p className="text-2xl font-semibold tracking-wide">Tunexy-app</p>
+      </div>
+    )
+  }
 
   return (
     <div className='p-4 md:p-8 max-w-[90rem] mx-auto'>

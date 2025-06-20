@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ViewType } from '~/types';
 import PlaylistTrack from './PlaylistTrack';
 import { useUIPreferencesStore } from '~/store/useUIPreferencesStore';
+import { PlaylistTracksSkeleton } from '~/components/Skeletons';
 
 interface Track {
     id: number;
@@ -70,6 +71,19 @@ interface PlaylistTracksProps {
 const PlaylistTracks: React.FC<PlaylistTracksProps> = ({ view }) => {
     const { preferences: { panelSize } } = useUIPreferencesStore()
 
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 4000);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if(isLoading) {
+        return <PlaylistTracksSkeleton/>
+    }
+    
     return (
         <div className=''>
             <div className="text-white ">

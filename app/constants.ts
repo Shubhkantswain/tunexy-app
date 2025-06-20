@@ -5,6 +5,7 @@ import DefaultGridItems from './routes/_app/_components/_desktopLayout/_mainCont
 import CompactGridItems from './routes/_app/_components/_desktopLayout/_mainContent/_leftSidebar/CompactGridItems';
 import DefaultListItems from './routes/_app/_components/_desktopLayout/_mainContent/_leftSidebar/DefaultListItems';
 import SmallPanelLibraryItems from './routes/_app/_components/_desktopLayout/_mainContent/_leftSidebar/SmallPanelLibraryItems';
+import { CompactGridItemsSkeleton, CompactListItemsSkeleton, DefaultGridItemsSkeleton, DefaultListItemsSkeleton, SmallPanelLibraryItemsSkeleton } from './components/Skeletons';
 
 
 type DisplayLocation = "desktopHeader" | "mobileNavigationFooter";
@@ -84,11 +85,19 @@ const VIEW_OPTIONS: ViewOption[] = [
 const tabs = ['Playlists', 'Artists', 'Albums', 'Podcasts'];
 
 const VIEW_COMPONENTS = {
+  "Default List": DefaultListItems,
   "Compact List": CompactListItems,
   "Default Grid": DefaultGridItems,
   "Compact Grid": CompactGridItems,
-  "Default List": DefaultListItems,
   "Small Panel": SmallPanelLibraryItems,
+};
+
+const VIEW_COMPONENTS_SKELETONS = {
+  "Default List": DefaultListItemsSkeleton,
+  "Compact List": CompactListItemsSkeleton,
+  "Default Grid": DefaultGridItemsSkeleton,
+  "Compact Grid": CompactGridItemsSkeleton,
+  "Small Panel": SmallPanelLibraryItemsSkeleton,
 };
 
 const VIEW_ICONS = {
@@ -98,4 +107,4 @@ const VIEW_ICONS = {
   "Default List": DefaultListIcon,
 };
 
-export { NAVIGATION_ITEMS, VIEW_OPTIONS, tabs, VIEW_COMPONENTS, VIEW_ICONS }
+export { NAVIGATION_ITEMS, VIEW_OPTIONS, tabs, VIEW_COMPONENTS, VIEW_COMPONENTS_SKELETONS, VIEW_ICONS }

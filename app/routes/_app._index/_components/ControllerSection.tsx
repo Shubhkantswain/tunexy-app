@@ -11,10 +11,15 @@ interface ControllerSectionsProps {
 
 const ControllerSection: React.FC<ControllerSectionsProps> = ({ scroll, canScrollLeft, canScrollRight }) => {
     const [isOpen, setIsOpen] = useState(false)
-    const {isLoading, setIsLoading} = useLoadingStore();
-   
-   
- 
+    const [ isLoading, setIsLoading ] = useState(true);
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+        return () => clearTimeout(timer);
+    }, []);
 
     if (isLoading) {
         return (
@@ -24,7 +29,7 @@ const ControllerSection: React.FC<ControllerSectionsProps> = ({ scroll, canScrol
 
                 {/* Controls Skeleton */}
                 <div className="flex items-center gap-4">
-                   
+
 
                     {/* See All Button Skeleton */}
                     <div className="h-8 w-20 bg-[#272727] rounded-full"></div>

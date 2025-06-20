@@ -1,24 +1,18 @@
-import { useEffect, useState } from "react";
-import TrackScroller from "./_components/TrackScroller";
+import { useEffect } from "react";
 import PlaylistSection from "./_components/PlaylistSection";
 import Footer from "../_app/Components/Footer";
 import { LogoIcon } from "~/Svgs";
 import { json, LoaderFunction } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
+import { useLoadingStore } from "~/store/useLoadingStore";
+import TrackSection from "./_components/TrackSection";
 
 // SSR loader function
 export const loader: LoaderFunction = async () => {
- 
-
   return json({ data: false });
 };
 
 const HomePagePlaylists = () => {
-    const idk = useLoaderData<typeof loader>();
-    console.log("idk", idk);
-    
-
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, setIsLoading } = useLoadingStore();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,26 +22,28 @@ const HomePagePlaylists = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  console.log("isLoading", isLoading);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white gap-4">
+        <LogoIcon width="80" height="80" />
+        <p className="text-2xl font-semibold tracking-wide">Tunexy-app</p>
+      </div>
+    )
+  }
+
   return (
     <>
-      {isLoading && (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white gap-4">
-          <LogoIcon width="80" height="80" />
-          <p className="text-2xl font-semibold tracking-wide">Tunexy-app</p>
-        </div>
-      )}
+      <div className="p-4 md:p-8 max-w-[90rem] mx-auto">
+        {/* Playlist Sections */}
+        {Array.from({ length: 3 }).map((_, index) => (
+          <PlaylistSection key={index} />
+        ))}
 
-      {!isLoading && (
-        <div className="p-4 md:p-8 max-w-[90rem] mx-auto">
-          {/* Playlist Sections */}
-          {Array.from({ length: 3 }).map((_, index) => (
-            <PlaylistSection key={index} />
-          ))}
-
-          <TrackScroller />
-          <Footer />
-        </div>
-      )}
+        <TrackSection />
+        <Footer />
+      </div>
     </>
   );
 };
